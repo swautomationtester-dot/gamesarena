@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070914">
+<title>KBC Quiz TV • GamesArena</title>
+<link rel="stylesheet" href="/style.css?v=20260812-kbc-brand-1">
+<link rel="stylesheet" href="/common-ui.css?v=20260812-showcase-final-2">
+<link rel="stylesheet" href="/quiz-tv-entry.css?v=20260812-tv-entry-1">
+</head>
+<body class="gaCommonPage quizTvEntryPage">
+<main class="quizTvEntryMain">
+  <section class="quizTvEntryCard" aria-labelledby="tvEntryTitle">
+    <div class="kbcQuizBrand" aria-label="KBC Quiz"><span class="kbcOrb">KBC</span><span class="kbcQuizWord">QUIZ</span></div>
+    <div class="quizTvKicker"><span></span> GAMESARENA • LIVE AUDIENCE TV</div>
+    <h1 id="tvEntryTitle">Open the KBC Quiz TV</h1>
+    <p class="quizTvLead">Enter the live room code shown by the host, or paste the room link you received. The TV screen will follow the live quiz in real time.</p>
+
+    <form id="tvEntryForm" class="quizTvForm">
+      <label for="roomInput">Room code or room link</label>
+      <div class="quizTvInputRow">
+        <input id="roomInput" name="room" inputmode="text" autocomplete="off" placeholder="e.g. 4850 or https://.../join.html?room=4850" aria-describedby="tvEntryHint" required>
+        <button type="submit" class="quizTvOpenBtn">Open TV <span>↗</span></button>
+      </div>
+      <p id="tvEntryHint" class="quizTvHint">For a direct room link, you can paste the complete link. For a room code, use the 4-digit code displayed by the host.</p>
+      <p id="tvEntryError" class="quizTvError" role="alert" hidden></p>
+    </form>
+
+    <div class="quizTvHow">
+      <div><span>01</span><b>Get the room code</b><small>Ask the host for the live quiz room code.</small></div>
+      <div><span>02</span><b>Open the TV</b><small>Enter the code above and press Open TV.</small></div>
+      <div><span>03</span><b>Watch live</b><small>Questions, players and results update automatically.</small></div>
+    </div>
+    <div class="quizTvDisclaimer"><strong>Audience screen</strong><span>This page is for viewing the live KBC-style quiz on a TV, laptop, tablet or phone. The host controls when each question opens.</span></div>
+  </section>
+</main>
+<script>
+(function(){
+  const form=document.getElementById('tvEntryForm');
+  const input=document.getElementById('roomInput');
+  const error=document.getElementById('tvEntryError');
+  function resolveDestination(value){
+    const raw=String(value||'').trim();
+    if(!raw)return '';
+    if(/^\d{4}$/.test(raw))return '/tv.html?room='+encodeURIComponent(raw);
+    try{
+      const u=new URL(raw,location.origin);
+      // A host-generated /screen/<token> link is already a valid TV link.
+      if(u.origin===location.origin && /^\/screen\/[^/]+/i.test(u.pathname)) return u.pathname+u.search;
+      const q=u.searchParams.get('room');
+      if(q && /^\d{4}$/.test(q.trim()))return '/tv.html?room='+encodeURIComponent(q.trim());
+      const parts=u.pathname.split('/').filter(Boolean);
+      const last=parts[parts.length-1]||'';
+      if(/^\d{4}$/.test(last))return '/tv.html?room='+encodeURIComponent(last);
+    }catch(e){}
+    const found=raw.match(/(?:room(?:Code)?[=:/-])([0-9]{4})/i);
+    return found?'/tv.html?room='+encodeURIComponent(found[1]):'';
+  }
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    error.hidden=true;
+    const destination=resolveDestination(input.value);
+    if(!destination){
+      error.textContent='Please enter a valid 4-digit room code, a room link, or the host-generated TV screen link.';
+      error.hidden=false;
+      input.focus();
+      return;
+    }
+    location.href=destination;
+  });
+})();
+</script>
+<script src="/common-ui.js?v=20260812-showcase-final-2"></script>
+</body>
+</html>

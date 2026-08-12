@@ -1,0 +1,1379 @@
+
+/* ===== Card Match enhanced UI ===== */
+.cardMatchPage{background:radial-gradient(circle at 50% -15%,#29224b 0,#080a10 52%);color:#f7f8fb}
+.cmHeroBtns{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.cmGameTop{width:min(1000px,100%);margin:0 auto 10px;display:flex;justify-content:space-between;align-items:center;gap:18px}
+.cmGameTop h2{margin:5px 0;font-size:clamp(26px,3vw,42px);letter-spacing:-1px}
+.cmTvControls{display:flex;gap:8px}.cmControl{border:1px solid #30394e;background:#121724;color:#fff;border-radius:10px;padding:10px 13px;font-weight:850;cursor:pointer}.primarySmall{background:#f1d36f!important;color:#112b30!important;border-color:#f1d36f!important}
+.turnMeta{color:#aab2c0;font-size:13px;margin-top:7px}.nowPill,.nextPill{font-size:9px;font-weight:950;letter-spacing:1px;padding:4px 6px;border-radius:5px;margin-right:5px}.nowPill{background:#20c997;color:#092d27}.nextPill{background:#30384c;color:#dbe0ea}.arrow{margin:0 7px;color:#657088}
+.turnStrip{width:min(1000px,100%);margin:0 auto 10px;display:flex;gap:7px;overflow:auto;padding:3px 1px 7px}
+.turnPlayer{display:flex;align-items:center;gap:7px;white-space:nowrap;padding:8px 11px;border:1px solid #2a3245;background:#101521;border-radius:10px;font-weight:800;font-size:12px}.turnPlayer small{font-size:8px;color:#8993a8;letter-spacing:.6px}.turnPlayer.now{border-color:var(--player);box-shadow:0 0 0 1px color-mix(in srgb,var(--player),transparent 65%),0 0 18px color-mix(in srgb,var(--player),transparent 82%)}.turnPlayer.next{border-style:dashed}
+.playerDot,.scoreDot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--player);box-shadow:0 0 10px color-mix(in srgb,var(--player),transparent 45%)}
+.cmScores{width:min(1000px,100%);margin:0 auto 12px;display:flex;gap:7px;flex-wrap:wrap}.cmScore{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid #2a3245;background:#121724;border-radius:10px;min-width:145px}.cmScore.active{border-color:var(--player);box-shadow:inset 3px 0 0 var(--player)}.cmScore div{flex:1}.cmScore small{display:block;color:#8993a8;font-size:8px;letter-spacing:.7px;margin-top:2px}.cmScore strong{font-size:20px}
+.cmBoard{width:min(820px,100%);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.cmCard{appearance:none;border:0;padding:0;background:none;aspect-ratio:1;cursor:pointer;min-width:0}.cmCard:disabled{cursor:default}
+.cmInner{display:block;width:100%;height:100%;position:relative}
+.cmFace{position:absolute;inset:0;border-radius:17px;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity .22s ease,transform .22s ease}
+.cmBack{background:linear-gradient(145deg,#222b40,#121826);border:1px solid #39445c;box-shadow:inset 0 1px 0 #ffffff0d,0 9px 24px #0004;opacity:1;transform:none}.backMark{font-size:32px;color:#78849d}
+.cmFront{background:#f8f9fb;border:1px solid #ffffff;box-shadow:0 9px 28px #0005;opacity:0;transform:scale(.96);pointer-events:none}.cmFront img{width:100%;height:100%;display:block;object-fit:contain;padding:10%;box-sizing:border-box}
+.cmCard.open .cmBack,.cmCard.matched .cmBack{opacity:0;transform:scale(.96);pointer-events:none}
+.cmCard.open .cmFront,.cmCard.matched .cmFront{opacity:1;transform:scale(1);pointer-events:auto}
+.cmCard.matched .cmFront{box-shadow:0 0 0 3px #20d6a0,0 0 30px #20d6a033}.cmCard:focus-visible .cmFace{outline:3px solid #f1d36f;outline-offset:3px}
+.cmFoot{width:min(820px,100%);margin:12px auto 0;display:flex;justify-content:space-between;color:#9ba5b8;font-size:12px}.cmPlayer{display:flex;align-items:center;gap:9px}.cmPlayer .playerDot{flex:none}
+.cmPanel .expired{border-color:#ff647c!important}.cmHint{color:#8993a8;font-size:13px;margin:0 0 12px}
+.cardMatchPage #toast{position:fixed!important;left:50%!important;top:auto!important;right:auto!important;bottom:24px!important;width:max-content!important;max-width:min(92vw,520px)!important;height:auto!important;min-height:0!important;margin:0!important;padding:12px 18px!important;box-sizing:border-box!important;display:block!important;white-space:normal!important;overflow:hidden!important;border-radius:999px!important;background:#fff!important;color:#111!important;font:800 14px/1.25 Arial,sans-serif!important;text-align:center!important;z-index:99999!important;opacity:0;transform:translate(-50%,20px)!important;pointer-events:none;transition:opacity .2s ease,transform .2s ease!important}
+.cardMatchPage #toast.show{opacity:1!important;transform:translate(-50%,0)!important}
+@media(max-width:700px){.cmGameTop{display:block}.cmTvControls{margin-top:10px}.cmControl{flex:1}.turnStrip{margin-top:5px}.cmBoard{gap:7px}.cmFace{border-radius:11px}.cmScores{display:grid;grid-template-columns:1fr 1fr}.cmScore{min-width:0}.cmFoot{font-size:11px}}
+
+/* GamesArena visual system */
+.cardMatchPage{background:radial-gradient(circle at 50% 0,#147176 0,#075056 35%,#03383d 72%,#022b30 100%)!important;color:#f8fcfb}
+.cardMatchPage .sitebar{background:#fff!important;box-shadow:0 3px 18px #001e2344}
+.cardMatchPage .sitebar .chip{background:#075056!important}
+.cardMatchPage .cmHero h1 em{color:#f1cc5d!important}
+.cardMatchPage .cmPanel{background:linear-gradient(180deg,#0b555aee,#063b40ee)!important;border-color:#39b2b555!important;box-shadow:0 16px 45px #001e2344}
+.cardMatchPage .cmBack{background:linear-gradient(145deg,#0b686d,#064348)!important;border-color:#39b2b555!important}
+.cardMatchPage .cmFront{background:#f8fbfa!important;border-color:#f1cc5d!important}
+.cardMatchPage .cmScore,.cardMatchPage .turnPlayer{background:#075056cc!important;border-color:#39b2b555!important}
+.cardMatchPage .cmScore.active{border-color:var(--player)!important}
+.cardMatchPage .cmControl{background:#075056!important;border-color:#39b2b555!important}
+.cardMatchPage .primarySmall{background:linear-gradient(135deg,#f1cc5d,#ffe18a)!important;border-color:#f1cc5d!important}
+.cardMatchPage .cmSecondary{background:#075056!important;border-color:#39b2b555!important}
+.cardMatchPage .cmHero p,.cardMatchPage .cmHint{color:#c4dedb!important}
+.cardMatchPage .cmCode{color:#f1cc5d!important}
+.cardMatchPage .cmQr{box-shadow:0 10px 30px #001e2344}
+.cardMatchPage .gaCardLogo{height:42px!important;width:155px!important;object-fit:contain}.cardMatchPage .cmBrand{gap:9px;color:#075056}.cardMatchPage .cmBrand>b{color:#075056}
+
+.cardMatchPage .gaCardLogo{object-fit:contain!important}
+
+/* =========================================================
+   CARD MATCH LAYOUT FOUNDATION
+   Fixes all game screens appearing at once / stretched UI.
+   ========================================================= */
+
+.cardMatchPage{
+  margin:0;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+.cardMatchPage .sitebar{
+  width:100%;
+  height:76px;
+  padding:0 30px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.cardMatchPage .cmBrand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+  color:#075056;
+  text-decoration:none;
+  font-size:15px;
+}
+
+.cardMatchPage .cmBrand .brand{
+  display:block;
+  height:44px;
+  width:auto;
+  max-width:245px;
+  object-fit:contain;
+}
+
+.cardMatchPage .cmBrand b{
+  white-space:nowrap;
+  font-size:14px;
+  letter-spacing:.2px;
+}
+
+.cardMatchPage .chip{
+  flex:none;
+  white-space:nowrap;
+}
+
+.cardMatchPage .cmWrap{
+  width:100%;
+  max-width:1280px;
+  min-height:calc(100vh - 76px);
+  margin:0 auto;
+  padding:44px 28px 34px;
+  display:flex;
+  flex-direction:column;
+}
+
+.cardMatchPage .cmScreen{
+  display:none !important;
+  width:100%;
+  flex:0 0 auto;
+}
+
+.cardMatchPage .cmScreen.active{
+  display:block !important;
+}
+
+.cardMatchPage .cmHero{
+  width:min(920px,100%);
+  margin:15px auto 0;
+  text-align:center;
+}
+
+.cardMatchPage .cmHero label,
+.cardMatchPage .cmPanel > label,
+.cardMatchPage .cmGameTop label{
+  display:block;
+  color:#f1cc5d;
+  font-size:12px;
+  font-weight:950;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.cardMatchPage .cmHero h1{
+  margin:18px 0 14px;
+  font-size:clamp(48px,7vw,88px);
+  line-height:.92;
+  letter-spacing:-3px;
+  text-align:left;
+}
+
+.cardMatchPage .cmHero h1 em{
+  font-style:normal;
+}
+
+.cardMatchPage .cmHero p{
+  margin:0 auto 28px;
+  max-width:700px;
+  color:#c4dedb;
+  font-size:16px;
+  line-height:1.55;
+}
+
+.cardMatchPage .cmHeroBtns{
+  width:min(680px,100%);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.cardMatchPage .primary,
+.cardMatchPage .cmSecondary{
+  min-height:52px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:900;
+}
+
+.cardMatchPage .primary.big,
+.cardMatchPage .cmSecondary.big{
+  width:100%;
+  padding:15px 18px;
+}
+
+.cardMatchPage .cmSecondary{
+  background:#075056;
+  color:#fff;
+  border:1px solid #39b2b555;
+}
+
+.cardMatchPage .cmPanel{
+  width:min(620px,100%);
+  margin:20px auto 0;
+  padding:32px;
+  border:1px solid #39b2b555;
+  border-radius:22px;
+  text-align:center;
+}
+
+.cardMatchPage .cmPanel h2{
+  margin:9px 0 8px;
+  font-size:clamp(28px,4vw,44px);
+}
+
+.cardMatchPage .cmPanel p{
+  line-height:1.5;
+}
+
+.cardMatchPage .cmCode{
+  margin:13px 0 5px;
+  font-size:clamp(48px,8vw,76px);
+  line-height:1;
+  font-weight:1000;
+  letter-spacing:10px;
+}
+
+.cardMatchPage .cmQr{
+  width:190px;
+  min-height:190px;
+  margin:18px auto;
+  padding:12px;
+  background:#fff;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.cardMatchPage .cmQr img,
+.cardMatchPage .cmQr canvas{
+  max-width:100%;
+  height:auto;
+}
+
+.cardMatchPage .cmUrl{
+  max-width:100%;
+  margin:8px auto 18px;
+  color:#b8d4d1;
+  font-size:11px;
+  line-height:1.45;
+  overflow-wrap:anywhere;
+}
+
+.cardMatchPage .cmPlayers{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+  margin:16px 0;
+  text-align:left;
+}
+
+.cardMatchPage .cmPlayers > *{
+  padding:13px;
+  border:1px solid #39b2b555;
+  border-radius:12px;
+  background:#075056aa;
+}
+
+.cardMatchPage .wide{
+  width:100%;
+  margin-top:8px;
+}
+
+.cardMatchPage .cmPanel input{
+  display:block;
+  width:100%;
+  min-height:52px;
+  margin:0 0 12px;
+  border-radius:12px;
+  padding:14px 15px;
+}
+
+.cardMatchPage .cmGame{
+  max-width:1120px;
+  margin:0 auto;
+}
+
+.cardMatchPage .cmGameTop{
+  width:100%;
+  margin:0 0 12px;
+}
+
+.cardMatchPage .cmGameTop h2{
+  margin:6px 0 0;
+}
+
+.cardMatchPage .turnStrip,
+.cardMatchPage .cmScores{
+  width:100%;
+}
+
+.cardMatchPage .cmBoard{
+  width:min(760px,100%);
+  margin:16px auto 0;
+}
+
+.cardMatchPage .cmFoot{
+  width:min(760px,100%);
+}
+
+.cardMatchPage .gaFooter{
+  width:100%;
+  margin:34px auto 0;
+  padding:16px 4px 0;
+  border-top:1px solid #39b2b533;
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  color:#9bc0bd;
+  font-size:12px;
+}
+
+.cardMatchPage #winner .cmPanel h1{
+  margin:8px 0 20px;
+}
+
+.cardMatchPage .trophy{
+  font-size:56px;
+  margin-bottom:8px;
+}
+
+/* Never allow hidden game screens to reserve layout space. */
+.cardMatchPage .cmScreen:not(.active){
+  position:absolute !important;
+  width:1px !important;
+  height:1px !important;
+  overflow:hidden !important;
+  clip:rect(0 0 0 0) !important;
+  clip-path:inset(50%) !important;
+  white-space:nowrap !important;
+  border:0 !important;
+  padding:0 !important;
+  margin:-1px !important;
+}
+
+@media (max-width:760px){
+  .cardMatchPage .sitebar{
+    height:64px;
+    padding:0 14px;
+  }
+  .cardMatchPage .cmBrand .brand{
+    height:36px;
+    max-width:190px;
+  }
+  .cardMatchPage .cmBrand b{
+    display:none;
+  }
+  .cardMatchPage .cmWrap{
+    min-height:calc(100vh - 64px);
+    padding:28px 14px 24px;
+  }
+  .cardMatchPage .cmHero{
+    margin-top:8px;
+  }
+  .cardMatchPage .cmHero h1{
+    font-size:clamp(44px,15vw,70px);
+    letter-spacing:-2px;
+  }
+  .cardMatchPage .cmHeroBtns{
+    grid-template-columns:1fr;
+  }
+  .cardMatchPage .cmPanel{
+    padding:24px 18px;
+    border-radius:18px;
+  }
+  .cardMatchPage .cmPlayers{
+    grid-template-columns:1fr;
+  }
+  .cardMatchPage .cmGameTop{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .cardMatchPage .cmTvControls{
+    width:100%;
+  }
+  .cardMatchPage .cmControl{
+    flex:1;
+  }
+  .cardMatchPage .cmBoard{
+    gap:7px;
+  }
+  .cardMatchPage .cmFace{
+    border-radius:11px;
+  }
+  .cardMatchPage .gaFooter{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+}
+
+@media (min-width:761px) and (max-height:800px){
+  .cardMatchPage .cmWrap{
+    padding-top:28px;
+  }
+  .cardMatchPage .cmHero{
+    margin-top:0;
+  }
+}
+
+
+/* ===== v110 live board reliability + side panels ===== */
+.cardMatchPage .cmGameLayout{
+  width:100%;
+  display:grid;
+  grid-template-columns:minmax(190px,230px) minmax(560px,820px) minmax(190px,230px);
+  justify-content:center;
+  align-items:start;
+  gap:18px;
+  margin-top:8px;
+}
+.cardMatchPage .cmCenterBoard{min-width:0}
+.cardMatchPage .cmSidePanel{display:flex;flex-direction:column;gap:12px}
+.cardMatchPage .cmSideCard{
+  background:linear-gradient(180deg,#075056e8,#063b40e8);
+  border:1px solid #39b2b555;
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 10px 30px #001e2333;
+}
+.cardMatchPage .cmSideCard label{
+  display:block;color:#f1cc5d;font-size:10px;font-weight:950;letter-spacing:1.6px;margin-bottom:12px
+}
+.cardMatchPage .cmInfoRow{
+  display:grid;grid-template-columns:24px 1fr auto;align-items:center;gap:7px;
+  padding:9px 0;border-bottom:1px solid #39b2b522;font-size:12px
+}
+.cardMatchPage .cmInfoRow:last-child{border-bottom:0}
+.cardMatchPage .cmInfoRow strong{color:#fff}
+.cardMatchPage .cmSideCard p{font-size:11px;line-height:1.5;color:#c4dedb;margin:9px 0}
+.cardMatchPage .cmCurrent{
+  display:flex;align-items:center;gap:9px;padding:9px;border:1px solid #39b2b522;
+  border-radius:10px;margin-bottom:7px;background:#07505688
+}
+.cardMatchPage .cmCurrent:last-child{margin-bottom:0}
+.cardMatchPage .cmCurrent div{min-width:0}
+.cardMatchPage .cmCurrent small{display:block;color:#9bc0bd;font-size:8px;text-transform:uppercase;letter-spacing:.8px}
+.cardMatchPage .cmCurrent b{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cardMatchPage .sideScoreRow{
+  display:flex;align-items:center;gap:7px;padding:8px 0;border-bottom:1px solid #39b2b522;font-size:11px
+}
+.cardMatchPage .sideScoreRow:last-child{border-bottom:0}
+.cardMatchPage .sideScoreRow b{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cardMatchPage .sideScoreRow strong{font-size:16px}
+.cardMatchPage .cmBoard{
+  width:min(820px,100%);
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:11px;
+  margin:8px auto 0;
+}
+.cardMatchPage .cmBack{
+  background:radial-gradient(circle at 50% 35%,#0d6b70,#06464b 70%,#03373b)!important;
+  border:1px solid #f1cc5d99!important;
+}
+.cardMatchPage .cmBack .gaCardLogo{
+  width:76%!important;height:76%!important;max-width:150px;object-fit:contain!important;
+  filter:drop-shadow(0 6px 10px #001e2366);transform:none!important;
+}
+/* Matched pairs stay permanently revealed.  Do not rely on a 3-D backface for
+   matched cards: once the server marks a pair as matched, hide the card-back
+   completely and show the actual pair artwork directly. */
+.cardMatchPage .cmCard.matched .cmInner{transform:none!important;}
+.cardMatchPage .cmCard.matched .cmBack{display:none!important;visibility:hidden!important;opacity:0!important;}
+.cardMatchPage .cmCard.matched .cmFront{display:flex!important;visibility:visible!important;opacity:1!important;transform:none!important;pointer-events:none!important;z-index:2;}
+.cardMatchPage .cmCard.matched .cmFront img{display:block!important;visibility:visible!important;opacity:1!important;}
+
+.cardMatchPage .cmCard.matched .cmFront{
+  box-shadow:0 0 0 4px var(--pair-color,#20d6a0),0 0 34px color-mix(in srgb,var(--pair-color,#20d6a0),transparent 45%)!important;
+  border-color:var(--pair-color,#20d6a0)!important;
+}
+.cardMatchPage .cmCard.matched.ownedPair .cmInner{
+  filter:drop-shadow(0 0 10px color-mix(in srgb,var(--pair-color),transparent 25%));
+}
+.cardMatchPage .cmBoardLoading{
+  grid-column:1/-1;min-height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border:1px dashed #39b2b577;border-radius:18px;background:#07505666;color:#fff;gap:8px
+}
+.cardMatchPage .cmBoardLoading span{font-size:32px;color:#f1cc5d;animation:cmspin 1s linear infinite}
+.cardMatchPage .cmBoardLoading small{color:#9bc0bd}
+@keyframes cmspin{to{transform:rotate(360deg)}}
+.cardMatchPage .cmEmpty{padding:12px;color:#9bc0bd;text-align:center}
+
+@media(max-width:1050px){
+  .cardMatchPage .cmGameLayout{grid-template-columns:1fr;max-width:820px;margin-left:auto;margin-right:auto}
+  .cardMatchPage .cmLeftPanel,.cardMatchPage .cmRightPanel{display:grid;grid-template-columns:1fr 1fr}
+}
+@media(max-width:760px){
+  .cardMatchPage .cmGameLayout{display:flex;flex-direction:column}
+  .cardMatchPage .cmCenterBoard{order:1;width:100%}
+  .cardMatchPage .cmLeftPanel{order:2}
+  .cardMatchPage .cmRightPanel{order:3}
+  .cardMatchPage .cmLeftPanel,.cardMatchPage .cmRightPanel{display:flex;width:100%}
+  .cardMatchPage .cmBoard{gap:7px}
+  .cardMatchPage .cmBack .gaCardLogo{width:82%!important;height:82%!important}
+}
+
+
+/* Tie-break result */
+.cardMatchPage .cmTieReason{margin:0 auto 12px;padding:10px 14px;border:1px solid #f1cc5d66;border-radius:10px;color:#f1cc5d;background:#07505688;font-weight:800;text-align:center}
+.cardMatchPage .cmFinalRow small{display:block;color:#b8d4d1;margin-top:3px}
+
+.cmJoinLink{display:inline-flex!important;align-items:center;justify-content:center;margin-top:12px;padding:10px 14px;border-radius:12px;color:#f4d77a!important;background:rgba(244,215,122,.08);border:1px solid rgba(244,215,122,.32);font-weight:800;text-decoration:none!important;word-break:break-all}
+.cmJoinLink:hover{background:rgba(244,215,122,.14);border-color:rgba(244,215,122,.55)}
+
+/* Participant-specific Card Match identity */
+.cardMatchPage .cmParticipantIdentity{
+  width:min(620px,100%);
+  margin:0 auto 14px;
+  padding:11px 16px;
+  border:1px solid #f1cc5d55;
+  border-radius:14px;
+  background:linear-gradient(135deg,#075056ee,#06383dee);
+  box-shadow:0 10px 28px #001e2330;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:11px;
+  color:#fff;
+}
+.cardMatchPage .cmParticipantIdentity.hidden{display:none!important}
+.cardMatchPage .cmParticipantIdentity .identityDot{
+  width:12px;height:12px;border-radius:50%;background:var(--player,#20c997);
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--player,#20c997) 20%,transparent);
+}
+.cardMatchPage .cmParticipantIdentity span:last-child{display:flex;flex-direction:column;align-items:flex-start}
+.cardMatchPage .cmParticipantIdentity small{font-size:9px;letter-spacing:1.4px;color:#9bc0bd;font-weight:900}
+.cardMatchPage .cmParticipantIdentity b{font-size:19px;line-height:1.15;color:#fff}
+.cardMatchPage .cmPanel .cmBrokenSafeLogo{
+  display:block;width:min(250px,70vw);height:auto;margin:0 auto 12px;
+}
+@media(max-width:650px){
+  .cardMatchPage .cmParticipantIdentity{padding:10px 12px}
+  .cardMatchPage .cmParticipantIdentity b{font-size:17px}
+}
+
+/* Compact GamesArena hero/logo on Card Match lobby screens */
+.cardMatchPage .cmBrokenSafeLogo{
+  display:block!important;
+  width:min(260px,42vw)!important;
+  max-width:260px!important;
+  height:auto!important;
+  max-height:150px!important;
+  object-fit:contain!important;
+  margin:0 auto 12px!important;
+}
+@media(max-width:650px){
+  .cardMatchPage .cmBrokenSafeLogo{
+    width:min(190px,58vw)!important;max-width:190px!important;max-height:110px!important;
+  }
+}
+
+/* =========================================================
+   GamesArena Card Match — final premium UI pass
+   v20260812.2
+   ========================================================= */
+
+.cardMatchPage{
+  --cm-gold:#f4d56f;
+  --cm-gold-soft:#ffe9a3;
+  --cm-teal:#18d5c2;
+  --cm-blue:#7b7cff;
+  --cm-panel:rgba(7,20,31,.78);
+  --cm-panel-strong:rgba(5,28,38,.92);
+  --cm-line:rgba(255,255,255,.10);
+  --cm-muted:#9db5bd;
+  background:transparent!important;
+  color:#f8fbff;
+  min-height:100dvh;
+}
+
+.cardMatchPage .cmWrap{
+  width:min(100% - 28px,1280px);
+  max-width:1280px;
+  min-height:calc(100dvh - 70px);
+  padding:clamp(24px,4vw,52px) 0 44px;
+  margin:0 auto;
+}
+
+.cardMatchPage .cmScreen{position:relative;isolation:isolate}
+
+/* Shared modern panel treatment */
+.cardMatchPage .cmPanel,
+.cardMatchPage .cmSideCard,
+.cardMatchPage .cmParticipantIdentity{
+  background:
+    linear-gradient(145deg,rgba(14,42,55,.88),rgba(4,20,30,.88))!important;
+  border:1px solid rgba(109,230,220,.18)!important;
+  box-shadow:
+    0 22px 65px rgba(0,0,0,.30),
+    inset 0 1px 0 rgba(255,255,255,.06)!important;
+  backdrop-filter:blur(18px) saturate(130%);
+}
+
+.cardMatchPage .cmPanel{
+  border-radius:26px!important;
+  position:relative;
+  overflow:hidden;
+}
+.cardMatchPage .cmPanel::before{
+  content:"";
+  position:absolute;
+  width:220px;height:220px;
+  right:-100px;top:-120px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(24,213,194,.17),transparent 68%);
+  pointer-events:none;
+}
+.cardMatchPage .cmPanel>*{position:relative;z-index:1}
+
+/* Remove duplicate page-level logo; the shared GamesArena header owns branding. */
+.cardMatchPage .cmBrokenSafeLogo{display:none!important}
+
+/* PLAYER WAITING LOBBY: clean, purposeful state with no fake room code/QR box */
+.cardMatchPage.cmIsPlayer #lobby .cmCode,
+.cardMatchPage.cmIsPlayer #lobby .cmQr,
+.cardMatchPage.cmIsPlayer #lobby .cmUrl{
+  display:none!important;
+}
+.cardMatchPage.cmIsPlayer #lobby .cmPanel{
+  width:min(640px,100%);
+  margin:clamp(28px,7vh,76px) auto 0;
+  padding:clamp(30px,5vw,54px) clamp(22px,5vw,48px);
+  text-align:center;
+}
+.cardMatchPage.cmIsPlayer #lobby .cmPanel > label{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:8px 13px;
+  border-radius:999px;
+  background:rgba(244,213,111,.10);
+  border:1px solid rgba(244,213,111,.28);
+  color:var(--cm-gold);
+}
+.cardMatchPage.cmIsPlayer #lobby .cmPanel > label::before{
+  content:"";
+  width:7px;height:7px;border-radius:50%;
+  background:var(--cm-teal);
+  box-shadow:0 0 16px var(--cm-teal);
+  animation:cmLivePulse 1.8s ease-in-out infinite;
+}
+.cardMatchPage.cmIsPlayer #lobby .cmPanel > p{
+  max-width:470px;
+  margin:18px auto 26px;
+  color:#c6d7dc!important;
+  font-size:clamp(14px,2vw,17px);
+}
+.cardMatchPage.cmIsPlayer #lobby .cmPlayers{
+  margin:22px auto 8px;
+  max-width:500px;
+}
+.cardMatchPage.cmIsPlayer #lobby .cmPlayers > *{
+  background:rgba(11,49,61,.70)!important;
+  border-color:rgba(109,230,220,.16)!important;
+}
+.cardMatchPage.cmIsPlayer #lobby .cmPlayers .cmPlayer{
+  animation:cmPlayerIn .45s ease both;
+}
+.cardMatchPage.cmIsPlayer #lobby .cmPanel::after{
+  content:"";
+  display:block;
+  width:min(260px,70%);
+  height:4px;
+  margin:24px auto 2px;
+  border-radius:999px;
+  background:linear-gradient(90deg,transparent,var(--cm-teal),var(--cm-gold),transparent);
+  background-size:200% 100%;
+  animation:cmShimmer 2.8s linear infinite;
+}
+
+/* TV/host lobby still gets the code and QR, but with premium presentation. */
+.cardMatchPage.cmIsTv #lobby .cmPanel{
+  width:min(680px,100%);
+}
+.cardMatchPage.cmIsTv #lobby .cmCode{
+  text-shadow:0 0 30px rgba(244,213,111,.20);
+}
+.cardMatchPage.cmIsTv #lobby .cmQr{
+  background:#fff!important;
+  border:5px solid rgba(255,255,255,.9);
+  box-shadow:0 14px 40px rgba(0,0,0,.32),0 0 0 1px rgba(244,213,111,.25);
+}
+
+/* Join page */
+.cardMatchPage .cmJoinScreen .cmPanel{
+  width:min(500px,100%);
+  margin:clamp(20px,5vh,60px) auto 0;
+  padding:clamp(26px,4vw,42px);
+}
+.cardMatchPage .cmJoinScreen .cmPanel h2{
+  font-size:clamp(30px,5vw,48px);
+  letter-spacing:-1.5px;
+}
+.cardMatchPage .cmJoinScreen input{
+  background:rgba(3,16,26,.72)!important;
+  color:#fff!important;
+  border:1px solid rgba(109,230,220,.18)!important;
+  outline:none;
+}
+.cardMatchPage .cmJoinScreen input:focus{
+  border-color:rgba(24,213,194,.65)!important;
+  box-shadow:0 0 0 4px rgba(24,213,194,.10);
+}
+
+/* Premium buttons */
+.cardMatchPage .primary,
+.cardMatchPage .cmSecondary,
+.cardMatchPage .cmControl{
+  position:relative;
+  overflow:hidden;
+  border-radius:13px!important;
+}
+.cardMatchPage .primary{
+  background:linear-gradient(135deg,#f7d878,#ffeaa0)!important;
+  color:#10262b!important;
+  border:1px solid rgba(255,238,167,.72)!important;
+  box-shadow:0 10px 26px rgba(244,213,111,.13);
+}
+.cardMatchPage .cmSecondary,
+.cardMatchPage .cmControl{
+  background:rgba(10,48,60,.78)!important;
+  color:#effbfa!important;
+  border:1px solid rgba(109,230,220,.22)!important;
+}
+.cardMatchPage .primary::after,
+.cardMatchPage .cmSecondary::after,
+.cardMatchPage .cmControl::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.15) 48%,transparent 70%);
+  transform:translateX(-120%);
+  transition:transform .55s ease;
+  pointer-events:none;
+}
+.cardMatchPage button:hover:not(:disabled)::after{transform:translateX(120%)}
+
+/* Game board */
+.cardMatchPage .cmGameTop{
+  padding:20px 22px;
+  border-radius:20px;
+  background:rgba(4,18,29,.62);
+  border:1px solid rgba(109,230,220,.12);
+  box-shadow:0 15px 45px rgba(0,0,0,.20);
+  backdrop-filter:blur(16px);
+}
+.cardMatchPage .cmGameTop h2{
+  font-size:clamp(28px,4vw,44px);
+}
+.cardMatchPage .turnStrip{
+  padding:4px 2px 10px;
+  scrollbar-width:thin;
+}
+.cardMatchPage .turnPlayer{
+  background:rgba(8,34,45,.78)!important;
+  border-color:rgba(109,230,220,.14)!important;
+  transition:transform .22s ease,box-shadow .22s ease;
+}
+.cardMatchPage .turnPlayer.now{
+  transform:translateY(-2px);
+}
+
+.cardMatchPage .cmBoard{
+  width:min(820px,100%);
+  gap:clamp(8px,1.2vw,13px);
+}
+.cardMatchPage .cmCard{
+  perspective:900px;
+  transition:transform .22s ease,filter .22s ease;
+}
+.cardMatchPage .cmCard:hover:not(:disabled){
+  transform:translateY(-5px) scale(1.015);
+  filter:drop-shadow(0 14px 24px rgba(0,0,0,.22));
+}
+.cardMatchPage .cmInner{
+  transform-style:preserve-3d;
+}
+.cardMatchPage .cmFace{
+  border-radius:18px!important;
+  backface-visibility:hidden;
+}
+.cardMatchPage .cmBack{
+  background:
+    radial-gradient(circle at 50% 30%,rgba(244,213,111,.18),transparent 34%),
+    linear-gradient(145deg,#0b6570,#063c4a 70%,#062d3a)!important;
+  border:1px solid rgba(244,213,111,.45)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 14px 30px rgba(0,0,0,.28)!important;
+}
+.cardMatchPage .cmBack::before{
+  content:"";
+  position:absolute;
+  inset:10%;
+  border:1px solid rgba(244,213,111,.18);
+  border-radius:13px;
+}
+.cardMatchPage .cmBack .gaCardLogo{
+  width:68%!important;
+  height:68%!important;
+  filter:drop-shadow(0 8px 15px rgba(0,0,0,.35))!important;
+}
+.cardMatchPage .cmFront{
+  background:linear-gradient(145deg,#fbfdfc,#e8f0ee)!important;
+  border:2px solid rgba(244,213,111,.72)!important;
+  box-shadow:0 14px 35px rgba(0,0,0,.25)!important;
+}
+.cardMatchPage .cmFront img{
+  padding:12%!important;
+}
+.cardMatchPage .cmCard.matched .cmFront{
+  animation:cmMatched .55s ease both;
+}
+
+.cardMatchPage .cmSideCard{
+  border-radius:18px!important;
+}
+.cardMatchPage .cmInfoRow,
+.cardMatchPage .cmCurrent,
+.cardMatchPage .sideScoreRow{
+  border-color:rgba(109,230,220,.10)!important;
+}
+
+/* identity */
+.cardMatchPage .cmParticipantIdentity{
+  border-radius:999px!important;
+  width:min(620px,100%);
+}
+
+/* motion */
+@keyframes cmLivePulse{
+  50%{transform:scale(1.35);opacity:.55}
+}
+@keyframes cmShimmer{
+  to{background-position:200% 0}
+}
+@keyframes cmPlayerIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+@keyframes cmMatched{
+  0%{transform:scale(.96)}
+  55%{transform:scale(1.035)}
+  100%{transform:scale(1)}
+}
+
+@media(max-width:1050px){
+  .cardMatchPage .cmWrap{width:min(100% - 22px,920px)}
+}
+@media(max-width:700px){
+  .cardMatchPage .cmWrap{
+    width:min(100% - 18px,620px);
+    padding-top:22px;
+  }
+  .cardMatchPage.cmIsPlayer #lobby .cmPanel{
+    margin-top:24px;
+    padding:28px 18px;
+  }
+  .cardMatchPage .cmGameTop{
+    padding:16px;
+  }
+  .cardMatchPage .cmFace{border-radius:12px!important}
+  .cardMatchPage .cmBack .gaCardLogo{width:74%!important;height:74%!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .cardMatchPage .cmParticipantIdentity *,
+  .cardMatchPage .cmPanel::after,
+  .cardMatchPage .cmPanel > label::before,
+  .cardMatchPage .cmCard.matched{animation:none!important}
+}
+
+
+/* ============================================================
+   GamesArena Card Match — HD Modern Game Board
+   Final visual layer: glass, aurora, depth, motion and 4K-style
+   crisp spacing. No game logic is changed here.
+   ============================================================ */
+
+.cardMatchPage{
+  position:relative;
+  isolation:isolate;
+  min-height:100dvh;
+  overflow-x:hidden;
+  background:
+    radial-gradient(900px 520px at 15% 10%, rgba(92,76,255,.22), transparent 68%),
+    radial-gradient(820px 520px at 88% 16%, rgba(0,220,205,.18), transparent 68%),
+    radial-gradient(700px 500px at 55% 90%, rgba(255,195,74,.08), transparent 70%),
+    linear-gradient(135deg,#050817 0%,#071423 48%,#061b22 100%) !important;
+}
+
+.cardMatchPage::before{
+  content:"";
+  position:fixed;
+  inset:-18%;
+  z-index:-2;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 35%,rgba(111,91,255,.16),transparent 26%),
+    radial-gradient(circle at 78% 30%,rgba(23,225,211,.13),transparent 25%),
+    radial-gradient(circle at 52% 80%,rgba(255,203,90,.07),transparent 24%);
+  filter:blur(45px);
+  animation:cmAuroraDrift 18s ease-in-out infinite alternate;
+}
+
+.cardMatchPage::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.22;
+  background-image:
+    linear-gradient(rgba(126,154,255,.11) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(126,154,255,.11) 1px,transparent 1px);
+  background-size:44px 44px;
+  mask-image:linear-gradient(to bottom,black 0%,rgba(0,0,0,.7) 55%,transparent 100%);
+  animation:cmGridDrift 24s linear infinite;
+}
+
+@keyframes cmAuroraDrift{
+  0%{transform:translate3d(-2%,-1%,0) scale(1)}
+  50%{transform:translate3d(3%,2%,0) scale(1.06)}
+  100%{transform:translate3d(-1%,4%,0) scale(1.02)}
+}
+@keyframes cmGridDrift{
+  from{background-position:0 0,0 0}
+  to{background-position:44px 44px,44px 44px}
+}
+@keyframes cmFloatIn{
+  from{opacity:0;transform:translateY(12px) scale(.985)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes cmPulseGlow{
+  0%,100%{box-shadow:0 0 0 0 rgba(241,204,93,0)}
+  50%{box-shadow:0 0 0 5px rgba(241,204,93,.07),0 0 34px rgba(241,204,93,.14)}
+}
+@keyframes cmMatchedPulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.025)}
+}
+
+.cardMatchPage .sitebar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  min-height:64px;
+  height:64px;
+  padding:0 clamp(16px,3vw,34px);
+  background:rgba(4,10,25,.76) !important;
+  border-bottom:1px solid rgba(105,145,255,.16);
+  box-shadow:0 10px 35px rgba(0,0,0,.24);
+  backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);
+}
+
+.cardMatchPage .cmWrap{
+  max-width:1400px;
+  min-height:calc(100dvh - 64px);
+  padding:clamp(24px,3vw,42px) clamp(16px,3vw,38px) 32px;
+}
+
+.cardMatchPage .cmGame{
+  width:100%;
+  max-width:1360px;
+  margin:0 auto;
+  animation:cmFloatIn .55s ease both;
+}
+
+.cardMatchPage .cmGameTop{
+  width:100%;
+  max-width:1180px;
+  margin:0 auto 14px;
+  padding:18px 20px;
+  border:1px solid rgba(88,196,220,.20);
+  border-radius:20px;
+  background:linear-gradient(135deg,rgba(8,35,51,.78),rgba(6,19,35,.62));
+  box-shadow:0 20px 55px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.05);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+
+.cardMatchPage .cmGameTop label,
+.cardMatchPage .cmSideCard label{
+  color:#ffd968;
+  text-shadow:0 0 18px rgba(255,213,95,.18);
+}
+
+.cardMatchPage .cmGameTop h2{
+  font-size:clamp(30px,3.5vw,52px);
+  line-height:1;
+  letter-spacing:-2px;
+  margin:8px 0 10px;
+  text-shadow:0 8px 30px rgba(0,0,0,.35);
+}
+
+.cardMatchPage .turnMeta{
+  color:#b9c8db;
+}
+
+.cardMatchPage .cmTvControls{
+  align-self:center;
+}
+
+.cardMatchPage .cmControl{
+  min-height:44px;
+  padding:10px 16px;
+  border-radius:12px;
+  background:rgba(10,45,61,.86) !important;
+  border:1px solid rgba(74,203,224,.28);
+  color:#f4fbff;
+  box-shadow:inset 0 1px rgba(255,255,255,.06),0 8px 24px rgba(0,0,0,.18);
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+.cardMatchPage .cmControl:hover{
+  transform:translateY(-2px);
+  border-color:rgba(104,226,238,.58);
+  box-shadow:0 12px 30px rgba(0,0,0,.25),0 0 24px rgba(34,202,218,.10);
+}
+.cardMatchPage .cmControl.primarySmall{
+  background:linear-gradient(135deg,#f2c957,#ffeaa1) !important;
+  color:#132333 !important;
+}
+
+.cardMatchPage .turnStrip{
+  max-width:1180px;
+  margin:0 auto 12px;
+  padding:4px 2px 8px;
+}
+.cardMatchPage .turnPlayer{
+  background:rgba(8,29,43,.72) !important;
+  border-color:rgba(77,185,213,.20);
+  box-shadow:inset 0 1px rgba(255,255,255,.04);
+  transition:transform .2s ease,border-color .2s ease;
+}
+.cardMatchPage .turnPlayer:hover{transform:translateY(-2px)}
+.cardMatchPage .turnPlayer.now{animation:cmPulseGlow 2.2s ease-in-out infinite}
+
+.cardMatchPage .cmGameLayout{
+  width:100%;
+  max-width:1240px;
+  margin:0 auto;
+  grid-template-columns:minmax(190px,220px) minmax(560px,820px) minmax(190px,220px);
+  gap:20px;
+  align-items:start;
+}
+
+.cardMatchPage .cmSidePanel{
+  gap:14px;
+  animation:cmFloatIn .65s ease both;
+}
+.cardMatchPage .cmRightPanel{animation-delay:.08s}
+
+.cardMatchPage .cmSideCard{
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(145deg,rgba(10,55,71,.86),rgba(5,25,42,.78)) !important;
+  border:1px solid rgba(83,202,223,.23);
+  border-radius:18px;
+  padding:17px;
+  box-shadow:0 18px 45px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.05);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+.cardMatchPage .cmSideCard::before{
+  content:"";
+  position:absolute;
+  width:120px;height:120px;
+  right:-70px;top:-70px;
+  border-radius:50%;
+  background:rgba(58,210,222,.09);
+  filter:blur(2px);
+  pointer-events:none;
+}
+.cardMatchPage .cmSideCard p{color:#afc8d1}
+
+.cardMatchPage .cmCenterBoard{
+  min-width:0;
+  animation:cmFloatIn .7s ease both;
+  animation-delay:.04s;
+}
+
+.cardMatchPage .cmScores{
+  margin:0 auto 14px;
+  justify-content:center;
+  gap:8px;
+}
+.cardMatchPage .cmScore{
+  min-width:150px;
+  flex:1 1 150px;
+  max-width:260px;
+  padding:10px 12px;
+  background:rgba(7,31,46,.76) !important;
+  border:1px solid rgba(82,188,215,.20);
+  border-radius:13px;
+  box-shadow:inset 0 1px rgba(255,255,255,.04);
+  transition:transform .2s ease,border-color .2s ease;
+}
+.cardMatchPage .cmScore:hover{transform:translateY(-2px)}
+.cardMatchPage .cmScore.active{
+  border-color:var(--player) !important;
+  box-shadow:inset 3px 0 var(--player),0 0 24px color-mix(in srgb,var(--player),transparent 82%);
+}
+
+.cardMatchPage .cmBoard{
+  width:min(820px,100%);
+  gap:13px;
+  margin:0 auto;
+  perspective:1400px;
+}
+
+.cardMatchPage .cmCard{
+  border-radius:20px;
+  transition:transform .2s ease,filter .2s ease;
+}
+.cardMatchPage .cmCard:not(:disabled):hover{
+  transform:translateY(-4px) scale(1.018);
+  filter:drop-shadow(0 14px 20px rgba(0,0,0,.24));
+}
+.cardMatchPage .cmInner{
+  border-radius:20px;
+  transform-style:preserve-3d;
+  transition:transform .58s cubic-bezier(.2,.72,.2,1);
+}
+.cardMatchPage .cmFace{
+  border-radius:20px;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  transition:none;
+}
+.cardMatchPage .cmBack{
+  opacity:1 !important;
+  transform:rotateY(0deg) !important;
+  background:
+    radial-gradient(circle at 50% 30%,rgba(32,222,214,.18),transparent 34%),
+    linear-gradient(145deg,#0a5963,#062d3b 72%,#061e30) !important;
+  border:1px solid rgba(255,215,103,.58) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.10),
+    inset 0 -20px 40px rgba(0,0,0,.15),
+    0 12px 28px rgba(0,0,0,.30);
+}
+.cardMatchPage .cmBack::after{
+  content:"";
+  position:absolute;
+  inset:7px;
+  border-radius:15px;
+  border:1px solid rgba(255,255,255,.07);
+  pointer-events:none;
+}
+.cardMatchPage .cmBack .gaCardLogo{
+  width:70% !important;
+  height:70% !important;
+  filter:drop-shadow(0 8px 15px rgba(0,0,0,.42));
+  transition:transform .35s ease,filter .35s ease;
+}
+.cardMatchPage .cmCard:not(:disabled):hover .cmBack .gaCardLogo{
+  transform:scale(1.055);
+  filter:drop-shadow(0 10px 22px rgba(255,207,92,.18));
+}
+
+.cardMatchPage .cmFront{
+  opacity:1 !important;
+  transform:rotateY(180deg) !important;
+  background:linear-gradient(145deg,#ffffff,#edf5f6) !important;
+  border:1px solid rgba(255,255,255,.92);
+  box-shadow:0 15px 35px rgba(0,0,0,.32);
+}
+.cardMatchPage .cmFront img{
+  padding:7%;
+  filter:drop-shadow(0 5px 8px rgba(0,0,0,.10));
+}
+
+.cardMatchPage .cmCard.open .cmInner,
+.cardMatchPage .cmCard.matched .cmInner{
+  transform:rotateY(180deg);
+}
+.cardMatchPage .cmCard.open .cmBack,
+.cardMatchPage .cmCard.matched .cmBack{
+  opacity:1 !important;
+}
+.cardMatchPage .cmCard.open .cmFront,
+.cardMatchPage .cmCard.matched .cmFront{
+  opacity:1 !important;
+}
+.cardMatchPage .cmCard.matched{
+  animation:cmMatchedPulse 2.2s ease-in-out infinite;
+}
+/* Matched pairs stay permanently revealed.  Do not rely on a 3-D backface for
+   matched cards: once the server marks a pair as matched, hide the card-back
+   completely and show the actual pair artwork directly. */
+.cardMatchPage .cmCard.matched .cmInner{transform:none!important;}
+.cardMatchPage .cmCard.matched .cmBack{display:none!important;visibility:hidden!important;opacity:0!important;}
+.cardMatchPage .cmCard.matched .cmFront{display:flex!important;visibility:visible!important;opacity:1!important;transform:none!important;pointer-events:none!important;z-index:2;}
+.cardMatchPage .cmCard.matched .cmFront img{display:block!important;visibility:visible!important;opacity:1!important;}
+
+.cardMatchPage .cmCard.matched .cmFront{
+  box-shadow:
+    0 0 0 3px var(--pair-color,#20d6a0),
+    0 0 34px color-mix(in srgb,var(--pair-color,#20d6a0),transparent 55%),
+    0 15px 35px rgba(0,0,0,.28) !important;
+  border-color:var(--pair-color,#20d6a0) !important;
+}
+
+.cardMatchPage .cmBoardLoading{
+  min-height:180px;
+  border:1px solid rgba(83,202,223,.20);
+  border-radius:20px;
+  background:rgba(6,31,44,.66);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  color:#dcecf2;
+  box-shadow:0 18px 45px rgba(0,0,0,.22);
+}
+.cardMatchPage .cmBoardLoading span{
+  font-size:34px;
+  color:#f5d260;
+  animation:cmSpin 1s linear infinite;
+}
+@keyframes cmSpin{to{transform:rotate(360deg)}}
+
+.cardMatchPage .cmCurrent{
+  background:rgba(5,42,56,.64) !important;
+  border-color:rgba(77,185,213,.18);
+  transition:transform .2s ease,border-color .2s ease;
+}
+.cardMatchPage .cmCurrent:hover{transform:translateX(2px);border-color:rgba(77,185,213,.4)}
+
+.cardMatchPage .sideScoreRow{
+  border-bottom-color:rgba(77,185,213,.13);
+}
+
+.cardMatchPage .cmFoot{
+  display:none !important;
+}
+
+/* Game-board density tuned for 15-inch laptops and smaller screens. */
+@media (min-width:1100px) and (max-height:900px){
+  .cardMatchPage .cmWrap{padding-top:24px}
+  .cardMatchPage .cmGameTop{padding:14px 18px}
+  .cardMatchPage .cmGameTop h2{font-size:38px}
+  .cardMatchPage .cmBoard{gap:10px}
+  .cardMatchPage .cmSideCard{padding:14px}
+}
+
+@media (max-width:1050px){
+  .cardMatchPage .cmGameLayout{
+    grid-template-columns:minmax(0,1fr) minmax(0,2.5fr);
+  }
+  .cardMatchPage .cmRightPanel{
+    grid-column:1/-1;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+  .cardMatchPage .cmCenterBoard{grid-column:2}
+  .cardMatchPage .cmLeftPanel{grid-column:1;grid-row:1}
+}
+
+@media (max-width:760px){
+  .cardMatchPage .sitebar{
+    height:60px;
+    min-height:60px;
+    padding:0 12px;
+  }
+  .cardMatchPage .cmWrap{
+    min-height:calc(100dvh - 60px);
+    padding:18px 12px 24px;
+  }
+  .cardMatchPage .cmGameTop{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    padding:15px;
+    border-radius:16px;
+  }
+  .cardMatchPage .cmGameTop h2{font-size:30px}
+  .cardMatchPage .cmTvControls{width:100%}
+  .cardMatchPage .cmControl{flex:1}
+  .cardMatchPage .cmGameLayout{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .cardMatchPage .cmCenterBoard{
+    order:1;
+    width:100%;
+  }
+  .cardMatchPage .cmLeftPanel{
+    order:2;
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+  .cardMatchPage .cmRightPanel{
+    order:3;
+    width:100%;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+  .cardMatchPage .cmBoard{gap:7px}
+  .cardMatchPage .cmFace{border-radius:13px}
+  .cardMatchPage .cmInner{border-radius:13px}
+  .cardMatchPage .cmCard{border-radius:13px}
+  .cardMatchPage .cmScores{display:grid;grid-template-columns:1fr 1fr}
+  .cardMatchPage .cmScore{max-width:none;min-width:0}
+}
+
+@media (max-width:500px){
+  .cardMatchPage .cmLeftPanel,
+  .cardMatchPage .cmRightPanel{grid-template-columns:1fr}
+  .cardMatchPage .cmBoard{gap:5px}
+  .cardMatchPage .cmGameTop h2{font-size:27px}
+  .cardMatchPage .turnStrip{margin-bottom:8px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .cardMatchPage::before,
+  .cardMatchPage::after,
+  .cardMatchPage .turnPlayer.now,
+  .cardMatchPage .cmCard.matched,
+  .cardMatchPage .cmBoardLoading span{
+    animation:none !important;
+  }
+  .cardMatchPage *,
+  .cardMatchPage *::before,
+  .cardMatchPage *::after{
+    scroll-behavior:auto !important;
+    transition-duration:.01ms !important;
+  }
+}
+
+
+/* 4-player mode: exactly 25 cells arranged as 5 columns × 5 rows. */
+.cardMatchPage .cmBoard.board-5x5{
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  width:min(820px,100%);
+  gap:10px;
+}
+.cardMatchPage .cmCard.bonusCard .cmFront{
+  background:radial-gradient(circle at 50% 35%,#fff8d7,#f1cc5d 72%,#d4a62e)!important;
+  border-color:#f1cc5d!important;
+  box-shadow:0 0 0 2px #f1cc5d55,0 0 24px #f1cc5d44!important;
+}
+.cardMatchPage .cmCard.bonusCard .cmFront img{
+  width:72%;height:72%;object-fit:contain;
+  filter:drop-shadow(0 5px 10px #001e2355);
+}
+@media(max-width:1050px){
+  .cardMatchPage .cmBoard.board-5x5{gap:8px}
+}
+@media(max-width:700px){
+  .cardMatchPage .cmBoard.board-5x5{gap:6px}
+}
+
+
+/* GamesArena Card Match — contestant identity de-clutter */
+.cmNextOnly{
+  min-height:78px;
+  margin-top:10px;
+}
+.cmNextOnly b{
+  display:block;
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.cmGameTop > div:first-child{
+  min-width:0;
+}
+.cmGameTop h2{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+@media (max-width: 900px){
+  .cmGameTop h2{
+    white-space:normal;
+  }
+}
+
+/* Winner prize display */
+.cmWinnerAmount{font-size:17px;letter-spacing:.08em}

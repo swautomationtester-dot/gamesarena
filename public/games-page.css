@@ -1,0 +1,231 @@
+
+/* GamesArena Explore Games — premium responsive page */
+.gaGamesPage{
+  --games-gold:#f4ce63;
+  --games-purple:#8b6cff;
+  --games-cyan:#22d3ee;
+  --games-panel:rgba(9,17,31,.72);
+  --games-border:rgba(255,255,255,.10);
+}
+.gaGamesPage .gamesPageMain{
+  width:min(1220px,calc(100% - 40px));
+  margin:0 auto;
+  padding:clamp(34px,5vw,72px) 0 clamp(48px,7vw,86px);
+  position:relative;
+  z-index:2;
+}
+.gaGamesPage .gamesHero{
+  min-height:clamp(330px,45vh,470px);
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);
+  align-items:center;
+  gap:clamp(24px,5vw,72px);
+  padding:clamp(30px,5vw,58px);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:32px;
+  background:
+    radial-gradient(circle at 8% 20%,rgba(124,92,255,.14),transparent 36%),
+    radial-gradient(circle at 94% 85%,rgba(34,211,238,.10),transparent 32%),
+    linear-gradient(145deg,rgba(8,16,30,.82),rgba(8,19,31,.54));
+  box-shadow:0 28px 90px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.06);
+  overflow:hidden;
+}
+.gaGamesPage .gamesHero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(110deg,transparent 15%,rgba(255,255,255,.035) 48%,transparent 72%);
+  transform:translateX(-100%);animation:gamesSheen 8s ease-in-out infinite;
+}
+.gaGamesPage .gamesHeroCopy{position:relative;z-index:2;animation:gamesIn .65s ease both}
+.gaGamesPage .gamesEyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  color:var(--games-gold);font-size:11px;font-weight:950;letter-spacing:2.3px;
+}
+.gaGamesPage .gamesEyebrow span{
+  width:8px;height:8px;border-radius:50%;background:var(--games-cyan);
+  box-shadow:0 0 18px rgba(34,211,238,.8);animation:gamesPulse 1.8s infinite;
+}
+.gaGamesPage .gamesEyebrow.muted{color:#9aa8bc}
+.gaGamesPage .gamesHero h1{
+  margin:14px 0 14px;color:#f8fbff;
+  font-size:clamp(46px,6.4vw,78px);line-height:.98;letter-spacing:-4px;font-weight:950;
+}
+.gaGamesPage .gamesHero h1 strong{
+  color:var(--games-gold);
+  text-shadow:0 0 35px rgba(244,206,99,.16);
+}
+.gaGamesPage .gamesHero p{
+  max-width:680px;margin:0;color:#aebbd0;
+  font-size:clamp(14px,1.45vw,17px);line-height:1.75;
+}
+.gaGamesPage .gamesHeroMeta{
+  display:flex;flex-wrap:wrap;gap:8px;margin-top:25px;
+}
+.gaGamesPage .gamesHeroMeta span{
+  padding:8px 11px;border:1px solid rgba(255,255,255,.08);
+  border-radius:999px;background:rgba(255,255,255,.035);
+  color:#8fa0b8;font-size:9px;font-weight:900;letter-spacing:1px;
+}
+.gaGamesPage .gamesHeroOrb{
+  position:relative;width:min(360px,100%);aspect-ratio:1;margin:auto;
+  display:grid;place-items:center;animation:gamesOrbIn .8s ease .1s both;
+}
+.gaGamesPage .heroRing{
+  position:absolute;border-radius:50%;border:1px solid rgba(244,206,99,.28);
+  box-shadow:0 0 55px rgba(124,92,255,.08);
+}
+.gaGamesPage .heroRingOne{inset:5%;animation:gamesSpin 18s linear infinite}
+.gaGamesPage .heroRingTwo{inset:17%;border-color:rgba(34,211,238,.22);animation:gamesSpinReverse 12s linear infinite}
+.gaGamesPage .heroCore{
+  width:42%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 25%,#273452,#0a1424 68%);
+  border:1px solid rgba(244,206,99,.52);
+  color:var(--games-gold);font-size:clamp(22px,3vw,34px);font-weight:950;letter-spacing:4px;
+  box-shadow:0 0 0 16px rgba(244,206,99,.025),0 25px 75px rgba(0,0,0,.45),0 0 55px rgba(124,92,255,.15);
+  animation:gamesCore 4s ease-in-out infinite;
+}
+.gaGamesPage .heroSpark{
+  position:absolute;width:10px;height:10px;border-radius:50%;background:#fff;
+  box-shadow:0 0 18px currentColor;animation:gamesSpark 4s ease-in-out infinite;
+}
+.gaGamesPage .s1{top:13%;right:25%;color:var(--games-cyan)}
+.gaGamesPage .s2{bottom:20%;left:17%;color:var(--games-gold);animation-delay:-1s}
+.gaGamesPage .s3{top:38%;left:8%;color:var(--games-purple);animation-delay:-2s}
+.gaGamesPage .s4{right:9%;bottom:34%;color:var(--games-cyan);animation-delay:-3s}
+
+.gaGamesPage .gamesSection{padding-top:clamp(44px,6vw,72px)}
+.gaGamesPage .gamesSectionHead{
+  display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:22px;
+}
+.gaGamesPage .gamesSectionHead h2{
+  margin:7px 0 5px;color:#f8fbff;font-size:clamp(28px,3.2vw,42px);
+  letter-spacing:-1.5px;line-height:1.05;
+}
+.gaGamesPage .gamesSectionHead p{margin:0;color:#8291a7;font-size:13px}
+.gaGamesPage .gamesReady{
+  display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;
+  border:1px solid rgba(34,197,94,.18);background:rgba(34,197,94,.06);
+  color:#86efac;font-size:9px;font-weight:950;letter-spacing:1.3px;white-space:nowrap;
+}
+.gaGamesPage .gamesReady i{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 12px #22c55e}
+
+.gaGamesPage .gameGrid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;
+}
+.gaGamesPage .gameCard{
+  min-width:0;display:flex;flex-direction:column;text-decoration:none;color:inherit;
+  border:1px solid var(--games-border);border-radius:25px;overflow:hidden;
+  background:var(--games-panel);box-shadow:0 20px 55px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.04);
+  backdrop-filter:blur(16px);
+  transform:translateY(0);
+  transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease;
+  animation:gamesCardIn .6s ease both;
+}
+.gaGamesPage .gameCard:nth-child(2){animation-delay:.08s}
+.gaGamesPage .gameCard:nth-child(3){animation-delay:.16s}
+.gaGamesPage .gameCard:hover{
+  transform:translateY(-8px);
+  border-color:rgba(244,206,99,.32);
+  box-shadow:0 28px 70px rgba(0,0,0,.34),0 0 45px rgba(124,92,255,.08),inset 0 1px 0 rgba(255,255,255,.07);
+}
+.gaGamesPage .gameVisual{
+  position:relative;height:220px;display:grid;place-items:center;overflow:hidden;
+  background:linear-gradient(145deg,rgba(16,50,62,.95),rgba(8,20,33,.92));
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.gaGamesPage .gameVisual::after{
+  content:"";position:absolute;inset:0;background:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:28px 28px;mask-image:linear-gradient(to bottom,#000,transparent);
+}
+.gaGamesPage .gameVisual .visualGlow{
+  position:absolute;width:210px;height:210px;border-radius:50%;filter:blur(28px);
+  background:rgba(34,211,238,.14);animation:gamesGlow 5s ease-in-out infinite;
+}
+.gaGamesPage .memoryCard .visualGlow{background:rgba(139,108,255,.16)}
+.gaGamesPage .colorCard .visualGlow{background:rgba(244,206,99,.14)}
+.gaGamesPage .gameVisual img{
+  position:relative;z-index:2;width:min(78%,300px);height:170px;object-fit:contain;
+  filter:drop-shadow(0 18px 24px rgba(0,0,0,.35));
+  transition:transform .35s ease,filter .35s ease;
+}
+.gaGamesPage .gameCard:hover .gameVisual img{transform:scale(1.055) translateY(-3px);filter:drop-shadow(0 24px 30px rgba(0,0,0,.45))}
+.gaGamesPage .gameBadge{
+  position:absolute;left:14px;top:14px;z-index:3;padding:7px 9px;border-radius:999px;
+  background:rgba(3,9,17,.62);border:1px solid rgba(255,255,255,.10);
+  color:#dce7f5;font-size:8px;font-weight:950;letter-spacing:1.2px;
+}
+.gaGamesPage .gameNumber{
+  position:absolute;right:15px;top:14px;z-index:3;color:rgba(255,255,255,.25);
+  font-size:20px;font-weight:950;letter-spacing:1px;
+}
+.gaGamesPage .gameBody{padding:20px 20px 21px;display:flex;flex-direction:column;flex:1}
+.gaGamesPage .gameTitleRow{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.gaGamesPage .gameTitleRow h3{margin:0;color:#f8fbff;font-size:22px;letter-spacing:-.6px}
+.gaGamesPage .gameTitleRow span{font-size:20px}
+.gaGamesPage .gameBody p{margin:10px 0 16px;color:#8fa0b7;font-size:12px;line-height:1.7;min-height:62px}
+.gaGamesPage .gameStats{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:19px}
+.gaGamesPage .gameStats span{
+  padding:6px 8px;border-radius:7px;background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.06);color:#aab8ca;font-size:8px;font-weight:900;letter-spacing:.5px;
+}
+.gaGamesPage .gameCta{
+  margin-top:auto;display:flex;align-items:center;justify-content:space-between;
+  min-height:43px;padding:0 13px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(244,206,99,.16),rgba(124,92,255,.12));
+  border:1px solid rgba(244,206,99,.18);color:#f6d978;
+  font-size:11px;font-weight:950;letter-spacing:.4px;
+}
+.gaGamesPage .gameCta b{font-size:18px;transition:transform .2s ease}
+.gaGamesPage .gameCard:hover .gameCta b{transform:translateX(4px)}
+
+@keyframes gamesIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes gamesCardIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes gamesOrbIn{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+@keyframes gamesPulse{50%{transform:scale(1.25);opacity:.55}}
+@keyframes gamesSpin{to{transform:rotate(360deg)}}
+@keyframes gamesSpinReverse{to{transform:rotate(-360deg)}}
+@keyframes gamesCore{50%{transform:translateY(-7px) scale(1.025)}}
+@keyframes gamesGlow{50%{transform:scale(1.12);opacity:.75}}
+@keyframes gamesSpark{0%,100%{transform:translateY(0) scale(1);opacity:.45}50%{transform:translateY(-15px) scale(1.35);opacity:1}}
+@keyframes gamesSheen{0%,65%,100%{transform:translateX(-100%)}82%{transform:translateX(100%)}}
+
+@media(max-width:980px){
+  .gaGamesPage .gamesPageMain{width:min(900px,calc(100% - 28px))}
+  .gaGamesPage .gamesHero{grid-template-columns:1fr .65fr;padding:34px}
+  .gaGamesPage .gamesHero h1{font-size:clamp(42px,7vw,64px)}
+  .gaGamesPage .gameGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gaGamesPage .gameCard:last-child{grid-column:1/-1}
+  .gaGamesPage .gameCard:last-child .gameVisual img{width:min(62%,300px)}
+}
+@media(max-width:720px){
+  .gaGamesPage .gamesPageMain{width:calc(100% - 20px);padding-top:24px}
+  .gaGamesPage .gamesHero{grid-template-columns:1fr;min-height:0;padding:28px 22px;border-radius:24px;text-align:center}
+  .gaGamesPage .gamesHeroCopy{display:flex;flex-direction:column;align-items:center}
+  .gaGamesPage .gamesHero h1{font-size:clamp(40px,11vw,58px);letter-spacing:-3px}
+  .gaGamesPage .gamesHero p{font-size:13px}
+  .gaGamesPage .gamesHeroMeta{justify-content:center}
+  .gaGamesPage .gamesHeroOrb{width:min(270px,72vw);margin-top:5px}
+  .gaGamesPage .gamesSection{padding-top:38px}
+  .gaGamesPage .gamesSectionHead{align-items:flex-start;flex-direction:column}
+  .gaGamesPage .gameGrid{grid-template-columns:1fr;gap:14px}
+  .gaGamesPage .gameCard:last-child{grid-column:auto}
+  .gaGamesPage .gameVisual{height:190px}
+  .gaGamesPage .gameBody{padding:18px}
+  .gaGamesPage .gameBody p{min-height:0}
+}
+@media(max-width:420px){
+  .gaGamesPage .gamesPageMain{width:calc(100% - 14px);padding-top:18px}
+  .gaGamesPage .gamesHero{padding:24px 16px}
+  .gaGamesPage .gamesHero h1{font-size:39px}
+  .gaGamesPage .gamesHeroMeta{display:grid;grid-template-columns:1fr;width:100%}
+  .gaGamesPage .gamesHeroMeta span{width:100%}
+  .gaGamesPage .gameVisual{height:175px}
+  .gaGamesPage .gameVisual img{height:140px}
+  .gaGamesPage .gameBody{padding:16px}
+}
+@media(prefers-reduced-motion:reduce){
+  .gaGamesPage .gamesHero::after,.gaGamesPage .gamesEyebrow span,.gaGamesPage .heroRing,
+  .gaGamesPage .heroCore,.gaGamesPage .heroSpark,.gaGamesPage .visualGlow{animation:none!important}
+  .gaGamesPage .gamesHeroCopy,.gaGamesPage .gamesHeroOrb,.gaGamesPage .gameCard{animation:none!important}
+}

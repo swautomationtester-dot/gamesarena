@@ -1,0 +1,46 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Participant Registration</title><link rel="stylesheet" href="/style.css?v=20260812-showcase-final-2"><link rel="stylesheet" href="/common-ui.css?v=20260812-showcase-final-2">
+</head><body><main class="wrap participantPage gaPageMain"><div class="kbcQuizBrand" aria-label="KBC Quiz"><span class="kbcOrb">KBC</span><span class="kbcQuizWord">QUIZ</span></div><div class=eyebrow>GAMESARENA QUIZ</div><h1>Enter the Arena</h1><div id=connection class="box status">Connecting…</div><div id=form><input id=room placeholder="Room code" maxlength=4 inputmode="numeric" pattern="[0-9]{4}" autocomplete="off"><input id=name placeholder="Full name" autocomplete="name" inputmode="text" pattern="[A-Za-z]+(?:[ ][A-Za-z]+)*"><input id=emp placeholder="Register number" maxlength=12 inputmode="numeric" pattern="[0-9]+" autocomplete="off"><button class="primary big" onclick=join()>Register & Join</button></div><div id=game class="hidden playerLiveGame">
+ <div id="registrationLobby" class="registrationLobby">
+  <div class="lobbyRulesAction"><button id="playerRulesBtnLobby" class="rulesBtn" type="button" onclick="togglePlayerRules(true)">📖 GAME RULES</button></div>
+  <div class="registrationIdentity"><span class="playerLiveDot"></span><div><small>USERNAME</small><strong id="playerName">Player</strong></div></div>
+  <div class="registrationRoom"><small>ROOM NUMBER</small><strong id="playerRoom">----</strong></div>
+  <div id="registrationMessage" class="registrationMessage">🟢 <b>Registered successfully.</b><br>Waiting for the host to start Fastest Finger.</div>
+ </div>
+ <section id="playerMain" class="playerMain hidden">
+  <div class="playerTopTools"><button id="playerRulesBtn" class="rulesBtn" type="button" onclick="togglePlayerRules(true)">📖 GAME RULES</button></div>
+  <div class="playerQuestionTimer kbcTimerCorner" aria-label="Question timer"><span>QUESTION TIMER</span><div class="kbcTimerRing"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="timerTrack" cx="50" cy="50" r="44"></circle><circle id="timerProgress" class="timerProgress" cx="50" cy="50" r="44"></circle></svg><strong id="questionTimer">30.0s</strong></div></div><div id=status class=box>Waiting for the host…</div>
+  <div id=answers class=answers></div>
+  <div id=life class=lifelines></div>
+  <div id="audiencePollResult" class="audiencePollResult hidden"></div><div id=result></div><div id="quitWrap" class="quitWrap hidden"><button id="quitBtn" class="quitBtn" onclick="quitGame()">🚪 Quit &amp; Take ₹0</button><small id="quitHint">Complete Q4 to unlock ₹20 Safe Money, or complete Q8 to unlock ₹40 Safe Money. Host approval is required.</small></div>
+ </section>
+</div><section class="prizeDifficultyGuide" aria-label="Question prize and difficulty">
+ <div><b>Q1</b><strong>₹05</strong><span>🟢 Very Easy</span></div>
+ <div><b>Q2</b><strong>₹10</strong><span>🟢 Easy</span></div>
+ <div><b>Q3</b><strong>₹15</strong><span>🟡 Medium</span></div>
+ <div><b>Q4</b><strong>₹20</strong><span>Milestone</span></div>
+ <div><b>Q5</b><strong>₹25</strong><span>🛡️ ₹20 Safe Money</span></div><div><b>Q6</b><strong>₹30</strong><span>Hard</span></div><div><b>Q7</b><strong>₹35</strong><span>Hard</span></div><div><b>Q8</b><strong>₹40</strong><span>🛡️ ₹40 Safe Money</span></div><div><b>Q9</b><strong>₹45</strong><span>Very Hard</span></div><div><b>Q10</b><strong>₹50</strong><span>🏆 Final</span></div>
+</section></main><script src=/socket.io/socket.io.js></script><script src="/player.js?v=20260812-showcase-final-2"></script><script src="/common-ui.js?v=20260812-showcase-final-2"></script>
+<div id="playerRulesModal" class="gameRulesModal hidden" role="dialog" aria-modal="true" aria-labelledby="playerRulesTitle">
+  <div class="gameRulesCard">
+    <button class="rulesClose" type="button" onclick="closePlayerRules()" aria-label="Close game rules">×</button>
+    <div class="eyebrow">GAMESARENA QUIZ</div>
+    <h2 id="playerRulesTitle">📖 Game Rules</h2>
+    <div class="rulesScroll">
+      <ol>
+        <li>Only registered and payment-approved participants can play their selected quiz.</li>
+        <li>Open registration, then use <b>Fastest Finger</b> to select the next contestant.</li>
+        <li>Fastest Finger is a <b>Sequence Challenge</b>: arrange the displayed numbers from <b>lowest to highest</b> within <b>15 seconds</b>. The first player to complete the sequence wins.</li>
+        <li>The selected contestant plays <b>10 questions</b> with four options each.</li>
+        <li><b>Q1–Q4:</b> 30 seconds. <b>Q5–Q10:</b> 60 seconds.</li>
+        <li>Contestant answers are locked and require Host approval before reveal.</li>
+        <li>Lifelines: <b>50:50, Audience Poll and Phone-a-Friend</b>.</li>
+        <li>Prize ladder: <b>₹5, ₹10, ₹15, ₹20, ₹25, ₹30, ₹35, ₹40, ₹45, ₹50</b>.</li>
+        <li><b>₹20 Safe Money</b> is secured after Q4 and is available from Q5. <b>₹40 Safe Money</b> is secured after Q8 and is available from Q9. Safe Quit requires Host approval.</li>
+        <li>Wrong answer or timeout eliminates the contestant from the current game.</li>
+        <li>Q10 is the ₹50 final. Completing all 10 questions wins the maximum ₹50.</li>
+      </ol>
+    </div>
+    <div class="hostRuleSyncNote">The Host can show or close these rules for everyone. Participants and TV can also close the panel locally.</div>
+  </div>
+</div>
+</body></html>

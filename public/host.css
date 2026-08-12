@@ -1,0 +1,236 @@
+
+/* ============================================================
+   GamesArena Host Console — 3-row control design
+   ============================================================ */
+body.gaUniversalShell:has(.hostPage){
+  --host-gold:#f4ce63;
+  --host-teal:#0b4f53;
+  --host-panel:rgba(7,18,31,.82);
+}
+body.gaUniversalShell:has(.hostPage) .hostPage{
+  width:min(100% - 28px, 1500px);
+  margin:0 auto;
+  padding:22px 0 42px;
+}
+.hostConsoleLayout{
+  display:grid;
+  grid-template-columns:220px minmax(0,1fr) 220px;
+  gap:14px;
+  align-items:start;
+}
+.hostEdgePanel{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  min-width:0;
+  position:sticky;
+  top:86px;
+}
+.hostEdgeCard{
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:18px;
+  background:linear-gradient(180deg,rgba(8,42,47,.88),rgba(5,20,31,.82));
+  box-shadow:0 20px 55px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.045);
+  padding:14px;
+  min-width:0;
+}
+.hostEdgeCard .sideTitle{margin:0 0 12px}
+.hostEdgeCard .sideTitle h3{font-size:15px!important}
+.hostEdgeCard .sideTitle small{font-size:9px;color:#91b4b8}
+.hostSideQr{
+  display:block!important;
+  width:158px!important;height:158px!important;
+  object-fit:contain;
+  margin:2px auto 12px!important;
+  padding:6px;background:#fff;border-radius:12px;
+}
+.hostSideRoomCode{margin:8px 0 12px!important;padding:10px!important}
+.hostSideRoomCode strong{font-size:27px!important}
+.hostLinkBlock{padding:10px 0!important;border-top:1px solid rgba(255,255,255,.08)}
+.hostLinkBlock>span{font-size:8px!important}
+.hostLinkBlock .roomJoinLink,.hostLinkBlock .screenLink{font-size:10px!important;line-height:1.45}
+.hostPlayersCard{padding:14px}
+.hostPlayerStats{display:grid;gap:8px}
+.hostPlayerStats>div{
+  padding:11px 10px;border:1px solid rgba(255,255,255,.08);border-radius:12px;
+  background:rgba(255,255,255,.035);
+}
+.hostPlayerStats span{
+  display:block;color:var(--host-gold);font-size:8px;font-weight:950;letter-spacing:1.5px;
+}
+.hostPlayerStats b{display:block;font-size:27px;line-height:1.05;margin:4px 0 2px;color:#fff}
+.hostPlayerStats small{font-size:9px;color:#8fa9b1}
+.hostLeaderboardCard #board{max-height:260px;overflow:auto}
+.hostLeaderboardCard #board .row{font-size:10px}
+
+.hostRows{min-width:0;display:flex;flex-direction:column;gap:12px}
+.hostConsoleToolbar{
+  min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:9px 12px;border:1px solid rgba(255,255,255,.09);border-radius:16px;
+  background:rgba(7,13,25,.76);backdrop-filter:blur(18px);
+  box-shadow:0 16px 40px rgba(0,0,0,.20);
+}
+.hostToolbarStatus{display:flex;align-items:center;gap:8px;min-width:0}
+.hostToolbarStatus>strong{font-size:10px;letter-spacing:1.4px;white-space:nowrap}
+.hostStatusDot{width:7px;height:7px;border-radius:50%;background:#42e59a;box-shadow:0 0 12px #42e59a}
+.hostConnectionStatus{
+  color:#8fa9b1;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  max-width:260px;
+}
+.hostToolbarActions{display:flex;align-items:center;gap:8px}
+.hostToolbarActions .createRoomBtn{margin:0!important;min-height:38px;padding:8px 13px!important;font-size:11px}
+.hostToolbarActions .flowState{margin:0;min-width:72px;text-align:center}
+
+.hostRow{
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:19px;
+  background:linear-gradient(145deg,rgba(8,20,34,.88),rgba(5,14,25,.76));
+  box-shadow:0 22px 65px rgba(0,0,0,.23),inset 0 1px 0 rgba(255,255,255,.04);
+  padding:15px;
+  min-width:0;
+}
+.hostRowHeader{
+  display:flex;align-items:center;gap:10px;margin-bottom:12px;
+}
+.hostRowNumber{
+  flex:0 0 34px;height:34px;display:grid;place-items:center;border-radius:10px;
+  color:#071b20;background:linear-gradient(135deg,#f5d36c,#e6b94c);
+  font-size:11px;font-weight:950;letter-spacing:.5px;
+}
+.hostRowHeader h2{margin:0!important;font-size:17px!important;letter-spacing:-.2px}
+.hostRowHeader p{margin:3px 0 0;color:#8fa9b1;font-size:9px;line-height:1.35}
+.hostStage{
+  padding:12px;border:1px solid rgba(255,255,255,.075);border-radius:14px;
+  background:rgba(255,255,255,.025);
+}
+.hostStage + .hostStage{margin-top:9px}
+.hostStageTitle{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:9px}
+.hostStageTitle span{font-size:11px;font-weight:900;color:#e9f3f4}
+.hostStageTitle small{font-size:8px;color:#829ba2;text-align:right}
+.hostButtonGrid{display:grid;gap:8px}
+.hostButtonGrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.hostButtonGrid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.hostButtonGrid button{
+  min-height:42px!important;height:auto!important;padding:9px 11px!important;
+  border-radius:11px!important;font-size:10px!important;font-weight:850!important;
+}
+.hostRow .fastTimer{margin-top:8px!important;padding:8px 10px!important;font-size:10px!important}
+.hostQuizStage{display:flex;flex-direction:column;gap:9px}
+.hostQuizStage .hostButtonGrid{margin-bottom:0}
+.hostQuestionTimerBar{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:9px 11px!important;border-radius:11px!important;
+}
+.hostQuestionTimerBar strong{font-size:18px!important}
+.hostQuestionTimerBar .timerActions{display:flex;gap:6px}
+.hostQuestionTimerBar .timerActions button{min-height:34px!important;padding:6px 9px!important;font-size:9px!important}
+.hostQuizStage #status{margin:0!important;padding:9px 11px!important;font-size:10px!important}
+.hostQuizStage .answerReview{margin:0!important}
+.hostRowThree{padding-bottom:14px}
+.hostRowThree .hostStage{min-height:0}
+.hostRowThree #fastResults{margin-top:9px}
+.hostRowThree .fastQrBox{margin-top:9px;padding:10px!important}
+.hostRowThree .fastQrBox .qr{width:110px!important}
+
+.hostLeftPanel .hostPrizeCard{position:static!important;margin:0!important}
+.hostLeftPanel .hostPrizeCard .ladderRow{padding:8px 9px!important;font-size:10px!important}
+.hostRightPanel .selectedPanel{margin:0!important;padding:14px!important}
+.hostRightPanel .selectedPanel h2{display:none}
+.hostRightPanel #pool{font-size:10px}
+.hostRightPanel #pool > *{margin-bottom:5px}
+.safeQuitSidePanel{border-width:1px!important;box-shadow:none!important}
+.safeQuitSideButtons button{min-height:36px!important;font-size:10px!important}
+
+.hostLoginModal{
+  position:fixed!important;inset:0!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  padding:20px!important;z-index:100000!important;
+  background:rgba(2,7,17,.84)!important;backdrop-filter:blur(14px)!important;
+}
+.hostLoginModal.hidden{display:none!important}
+.hostLoginCard{
+  width:min(410px,calc(100vw - 32px))!important;
+  max-height:calc(100dvh - 40px);overflow:auto;
+  margin:0 auto!important;transform:none!important;
+  border-radius:20px!important;
+  box-shadow:0 35px 100px rgba(0,0,0,.58),0 0 0 1px rgba(244,206,99,.10)!important;
+}
+.hostLoginCard>img{display:block;margin:0 auto 8px!important;width:58px!important;height:58px!important}
+.hostLoginCard .eyebrow{text-align:center}
+.hostLoginCard h2{text-align:center}
+.hostLoginCard p{text-align:center;font-size:12px}
+
+@media (min-width:1050px) and (max-width:1500px) and (max-height:950px){
+  body.gaUniversalShell:has(.hostPage) .hostPage{padding-top:16px;padding-bottom:28px}
+  .hostConsoleLayout{grid-template-columns:205px minmax(0,1fr) 205px;gap:12px}
+  .hostEdgeCard{padding:12px}
+  .hostSideQr{width:140px!important;height:140px!important}
+  .hostRow{padding:13px}
+  .hostRowHeader{margin-bottom:9px}
+  .hostStage{padding:10px}
+  .hostButtonGrid button{min-height:40px!important}
+}
+@media(max-width:1100px){
+  .hostConsoleLayout{grid-template-columns:190px minmax(0,1fr)}
+  .hostRightPanel{grid-column:1 / -1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));position:static}
+  .hostRightPanel .hostPlayersCard,.hostRightPanel .selectedPanel,.hostRightPanel .hostLeaderboardCard{min-width:0}
+}
+@media(max-width:820px){
+  .hostConsoleLayout{display:flex;flex-direction:column}
+  .hostLeftPanel,.hostRightPanel{width:100%;position:static}
+  .hostLeftPanel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hostRightPanel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hostLeftPanel .hostJoinCard{grid-column:1 / -1}
+}
+@media(max-width:560px){
+  body.gaUniversalShell:has(.hostPage) .hostPage{width:calc(100% - 18px);padding-top:10px}
+  .hostConsoleToolbar{align-items:flex-start;flex-direction:column}
+  .hostToolbarActions{width:100%}
+  .hostToolbarActions .createRoomBtn{flex:1}
+  .hostButtonGrid.two,.hostButtonGrid.three{grid-template-columns:1fr}
+  .hostLeftPanel,.hostRightPanel{display:flex}
+  .hostRow{padding:11px}
+  .hostRowHeader h2{font-size:15px!important}
+  .hostRowHeader p{font-size:8px}
+  .hostStageTitle{display:block}
+  .hostStageTitle small{display:block;text-align:left;margin-top:3px}
+  .hostQuestionTimerBar{align-items:flex-start;flex-direction:column}
+  .hostQuestionTimerBar .timerActions{width:100%}
+  .hostQuestionTimerBar .timerActions button{flex:1}
+}
+
+/* ===== FINAL HOST AUTH / DASHBOARD VISIBILITY PATCH ===== */
+body.modernHostPage > .hostLoginModal,
+body.modernHostPage > .paymentEditModal,
+body.modernHostPage > .demoModal{
+  position:fixed !important;
+}
+body.modernHostPage > .hostLoginModal{
+  inset:0 !important;
+  width:100vw !important;
+  height:100dvh !important;
+  margin:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:24px !important;
+  transform:none !important;
+}
+body.modernHostPage > .hostLoginModal .hostLoginCard{
+  position:relative !important;
+  left:auto !important;
+  right:auto !important;
+  top:auto !important;
+  bottom:auto !important;
+  transform:none !important;
+  margin:0 !important;
+  width:min(430px,calc(100vw - 48px)) !important;
+  max-width:430px !important;
+}
+/* Authenticated host console should occupy the viewport instead of leaving a blank shell. */
+.modernHostPage .hostPage{width:min(100% - 28px,1500px);margin:0 auto;}
+.modernHostPage #area:not(.hidden){min-height:0;}
+@media(max-width:600px){
+  body.modernHostPage > .hostLoginModal{padding:14px !important;}
+  body.modernHostPage > .hostLoginModal .hostLoginCard{width:100% !important;max-width:none !important;}
+}

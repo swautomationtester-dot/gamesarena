@@ -1,0 +1,247 @@
+/* GamesArena Responsive UI — 15-inch laptop / tablet / mobile pass */
+:root{
+  --ui-max:1360px;
+  --ui-gutter:clamp(14px,2.2vw,28px);
+  --ui-gap:clamp(12px,1.4vw,20px);
+  --ui-radius:18px;
+}
+html{scroll-behavior:smooth}
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+body{min-height:100dvh}
+img,svg,canvas,video{max-width:100%}
+button,input,select,textarea{font:inherit;min-width:0}
+button{touch-action:manipulation}
+
+/* Common shell */
+body.gaCommonPage{display:flex;flex-direction:column;min-height:100dvh}
+body.gaCommonPage>.gaCommonHeader{flex:0 0 auto;height:64px;min-height:64px;padding-inline:clamp(14px,2.5vw,30px)}
+body.gaCommonPage>.gaPageMain,body.gaCommonPage>main{flex:1 0 auto;width:100%;min-width:0}
+body.gaCommonPage>.gaCommonFooter{flex:0 0 auto;margin-top:auto;min-height:52px;padding-block:15px}
+.gaCommonPage .modal{z-index:1000!important}
+body.tv>.gaCommonFooter,body:has(.trackWrap)>.gaCommonFooter{display:none}
+.gaCommonHeader{gap:12px}
+.gaCommonBrand{min-width:0}
+.gaCommonBrand img{flex:0 0 40px;width:40px;height:40px}
+.gaCommonBrandText{overflow:hidden;text-overflow:ellipsis}
+.gaCommonNav{min-width:0;flex-wrap:wrap;justify-content:flex-end}
+.gaCommonNav a{white-space:nowrap}
+
+/* Page content rhythm for a 1366x768-ish laptop */
+.gaPageMain{width:min(var(--ui-max),calc(100% - var(--ui-gutter)*2));margin-inline:auto;padding-block:clamp(18px,2.5vh,32px)}
+.wrap.gaPageMain,.hostPage.gaPageMain,.paymentWrap.gaPageMain,.cmWrap.gaPageMain{max-width:var(--ui-max);margin-inline:auto}
+.wrap{width:min(var(--ui-max),calc(100% - var(--ui-gutter)*2));margin-inline:auto;padding:clamp(18px,2vw,28px)}
+.wrap.narrow{max-width:720px}
+
+/* Forms and cards */
+.box,.card,.paymentCard,.controlCard,.flowSection,.hostPrizeCard,.hostJoinCard,.cmPanel,.cwPanel{min-width:0}
+input,select,textarea{max-width:100%}
+textarea{resize:vertical}
+.answers{grid-template-columns:repeat(2,minmax(0,1fr));min-width:0}
+
+/* Home */
+.gaHome .gaHeader{height:64px;padding-inline:clamp(14px,2.5vw,30px)}
+.gaHome .gaHeaderLogo{width:190px;height:50px}
+.gaHome .gaHero{width:min(1180px,calc(100% - 40px));min-height:410px;padding:34px 0 28px;gap:12px}
+.gaHome .gaHeroVisual{min-height:350px}
+.gaHome .gaLogoStage{width:240px;height:240px}
+.gaHome .gaLogoStage img{width:165px}
+.gaHome .gaGameShowcase{width:min(1180px,calc(100% - 40px))}
+.gaHome .gaTiles{grid-template-columns:repeat(3,minmax(0,1fr))}
+.gaHome .gaTileBody{min-height:132px}
+
+/* Host console */
+.hostPage{width:min(var(--ui-max),calc(100% - var(--ui-gutter)*2));margin-inline:auto}
+.hostPage .hostGrid{grid-template-columns:minmax(0,1fr) 270px;gap:16px}
+.hostPage .hostHeader{gap:14px;margin-bottom:16px}
+.hostPage .hostHeaderTitle{min-width:0}
+.hostPage .hostHeaderActions{gap:7px}
+.hostPage .hostHeaderActions>*{white-space:nowrap}
+.hostPage .hostRoomSummary{padding:18px 20px;min-height:140px}
+.hostPage .hostRoomLiveTitle{font-size:clamp(32px,3.4vw,58px)!important;line-height:1}
+.hostPage .statsModern{gap:10px;margin:12px 0}
+.hostPage .statsModern>div{padding:14px 16px}
+.hostPage .statsModern b{font-size:28px}
+.hostPage .controlCard{padding:16px}
+.hostPage .flowSection{padding:15px}
+.hostPage .flowButtons{gap:8px}
+.hostPage .flowButtons button{min-height:44px}
+.hostPage .hostQuestionCard{min-width:0}
+.hostPage .hostSide{position:sticky;top:78px}
+.hostPage .hostSide .qr{width:150px}
+
+/* Registration */
+.registrationLobbyLayout{width:min(100%,1000px);grid-template-columns:minmax(240px,360px) minmax(0,1fr);gap:18px}
+.registrationGrid{min-width:0}
+
+/* Card Match */
+.cardMatchPage .cmWrap{width:min(var(--ui-max),calc(100% - var(--ui-gutter)*2));margin-inline:auto;padding-block:22px 28px;min-height:0}
+.cardMatchPage .cmGameLayout{grid-template-columns:minmax(180px,210px) minmax(0,820px) minmax(180px,210px);gap:14px}
+.cardMatchPage .cmBoard{width:min(760px,100%);gap:9px}
+.cardMatchPage .cmSideCard{padding:14px}
+
+/* Color War */
+.cwPage .cwHeader,.cwTvPage .cwTvHeader{display:none}
+.cwPage .cwWrap{width:min(1080px,calc(100% - var(--ui-gutter)*2));margin-inline:auto;padding:24px 0 36px}
+.cwPage .cwHero{margin:18px auto 28px;padding:26px 20px}
+.cwPage .cwLobbyGrid{grid-template-columns:170px 170px minmax(0,1fr);gap:12px}
+.cwPage .cwPanel{padding:24px}
+.cwPage .cwBoard{width:min(560px,100%);gap:7px}
+.cwTvPage #tvMain{min-height:calc(100dvh - 116px)}
+.cwTvPage .cwTvStage{min-height:calc(100dvh - 116px);padding:28px 3vw}
+
+/* Payment */
+.paymentWrap{width:min(1000px,calc(100% - var(--ui-gutter)*2));margin-inline:auto;padding-block:22px 34px}
+.paymentCard{padding:22px}
+.paymentGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+/* Payment inventory */
+body:has(#loginModal) .wrap.gaPageMain{width:min(1180px,calc(100% - var(--ui-gutter)*2));padding-block:20px 34px}
+body:has(#loginModal) .grid{grid-template-columns:280px minmax(0,1fr);gap:14px}
+body:has(#loginModal) .card{padding:18px}
+body:has(#loginModal) .qr{width:min(220px,100%);height:auto;aspect-ratio:1}
+body:has(#loginModal) .search{flex-wrap:wrap}
+body:has(#loginModal) .search .input{min-width:180px}
+body:has(#loginModal) .modal{padding:70px 16px 20px}
+body:has(#loginModal) .login,body:has(#loginModal) .edit{max-height:calc(100dvh - 100px);overflow:auto}
+
+/* Admin / roster */
+.adminHeader{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.adminForm{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.adminForm button{grid-column:1/-1}
+.rosterHeader{display:grid;grid-template-columns:auto auto minmax(160px,1fr);align-items:center;gap:10px}
+
+/* Quiz TV */
+body.tv{display:flex;flex-direction:column;min-height:100dvh}
+body.tv>#tvmain{flex:1;min-height:0;width:100%;padding:0 var(--ui-gutter)}
+body.tv>.tvtop{height:58px;min-height:58px;padding:8px var(--ui-gutter)}
+body.tv #tvmain{min-height:calc(100dvh - 110px)}
+body.tv .questionScreen,body.tv .winnerScreen,body.tv .elimination,body.tv .fastestScreen,body.tv .tvwait{width:min(1120px,100%)}
+body.tv #tvSideRail{max-width:250px}
+body.tv .tvopts{gap:12px}
+body.tv .tvopts div{padding:18px;font-size:clamp(18px,1.7vw,26px)}
+body.tv .sequenceTv{margin:18px 0;padding:16px}
+
+/* Touch / focus */
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid rgba(241,204,93,.65);outline-offset:2px}
+
+/* 15-inch laptop: 1280–1440 wide, ~720–900 high */
+@media (min-width:1051px) and (max-width:1450px){
+  .gaCommonHeader{height:60px;min-height:60px}
+  .gaCommonBrand img{width:36px;height:36px}
+  .gaCommonBrandText{font-size:16px}
+  .gaCommonNav a{padding:7px 10px;font-size:11px}
+  .gaCommonFooter{min-height:46px;padding-block:12px}
+  .hostPage .hostGrid{grid-template-columns:minmax(0,1fr) 250px}
+  .hostPage .hostSide .qr{width:138px}
+  .hostPage .hostRoomSummary{min-height:125px}
+  .cardMatchPage .cmGameLayout{grid-template-columns:180px minmax(0,1fr) 180px}
+}
+
+/* Landscape tablet / narrow laptop */
+@media (max-width:1100px){
+  .gaHome .gaHero{grid-template-columns:1fr;min-height:0;text-align:center}
+  .gaHome .gaHeroCopy{max-width:760px;margin-inline:auto}
+  .gaHome .gaHeroActions,.gaHome .gaTrustRow{justify-content:center}
+  .gaHome .gaHeroVisual{min-height:300px}
+  .gaHome .gaTiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hostPage .hostGrid{grid-template-columns:1fr}
+  .hostPage .hostSide{position:static;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .hostPage .hostSide>section{min-width:0}
+  .cardMatchPage .cmGameLayout{grid-template-columns:1fr;max-width:850px;margin-inline:auto}
+  .cardMatchPage .cmLeftPanel,.cardMatchPage .cmRightPanel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.tv #tvSideRail{position:static;max-width:none}
+}
+
+@media (max-width:760px){
+  .gaCommonHeader{height:58px;min-height:58px;padding-inline:10px}
+  .gaCommonBrand img{width:34px;height:34px}
+  .gaCommonBrandText{font-size:15px}
+  .gaCommonBrandText small{font-size:7px}
+  .gaCommonLive{display:none}
+  .gaCommonNav{gap:3px}
+  .gaCommonNav a{font-size:9px;padding:7px 6px}
+  .gaCommonFooter{justify-content:center;text-align:center;padding:13px 10px;font-size:10px}
+  .gaCommonFooterLinks{justify-content:center}
+  .gaPageMain,.wrap,.hostPage,.paymentWrap,.cardMatchPage .cmWrap{width:calc(100% - 18px)}
+  .gaHome .gaHeader{height:60px;padding-inline:12px}
+  .gaHome .gaHeaderLogo{width:155px;height:48px}
+  .gaHome .gaHeaderHost{padding:8px 10px;font-size:9px}
+  .gaHome .gaHero{width:calc(100% - 24px);padding-top:26px}
+  .gaHome .gaHero h1{font-size:clamp(46px,14vw,70px);letter-spacing:-2.5px}
+  .gaHome .gaHero p{font-size:14px}
+  .gaHome .gaHeroActions{flex-direction:column}
+  .gaHome .gaHeroActions a{justify-content:center}
+  .gaHome .gaHeroVisual{min-height:260px}
+  .gaHome .gaLogoStage{width:190px;height:190px}
+  .gaHome .gaLogoStage img{width:130px}
+  .gaHome .gaFloatChip{font-size:8px;padding:6px 8px}
+  .gaHome .gaChipQuiz{right:-20px}.gaHome .gaChipPlay{left:-20px}
+  .gaHome .gaGameShowcase{width:calc(100% - 24px)}
+  .gaHome .gaSectionIntro{align-items:flex-start;flex-direction:column}
+  .gaHome .gaTiles{grid-template-columns:1fr}
+  .hostPage .hostHeader{flex-direction:column;align-items:flex-start}
+  .hostPage .hostHeaderActions{width:100%;justify-content:flex-start}
+  .hostPage .hostHeaderActions>*{flex:1 1 120px}
+  .hostPage .statsModern{grid-template-columns:1fr 1fr}
+  .hostPage .hostSide{grid-template-columns:1fr}
+  .controlCard .buttons,.hostPage .flowButtons{grid-template-columns:1fr}
+  .adminForm,.paymentGrid{grid-template-columns:1fr}
+  .adminForm button{grid-column:auto}
+  .rosterHeader{grid-template-columns:auto auto 1fr}
+  .registrationLobbyLayout{grid-template-columns:1fr}
+  .registrationRosterCard{min-height:0;max-height:none}
+  .cardMatchPage .cmLeftPanel,.cardMatchPage .cmRightPanel{display:flex;flex-direction:column}
+  .cardMatchPage .cmBoard{gap:6px}
+  .cwPage .cwWrap{width:calc(100% - 18px)}
+  .cwPage .cwLobbyGrid{grid-template-columns:1fr 1fr}
+  .cwPage .cwPlayersCard{grid-column:1/-1}
+  .cwPage .cwHostActions{flex-direction:column}
+  .cwTvPage .cwTvLobbyGrid{grid-template-columns:1fr}
+  .cwTvPage .cwTvRoster{grid-template-columns:1fr}
+  .cwTvPage .cwTvBoard{width:min(94vw,620px)}
+  body.tv>.tvtop{height:52px;min-height:52px;padding:6px 10px}
+  body.tv #tvmain{min-height:calc(100dvh - 104px)}
+  body.tv>.gaCommonFooter{display:none}
+  body:has(.trackWrap)>main{height:calc(100dvh - 58px)}
+}
+
+@media (max-width:480px){
+  .gaCommonBrandText{max-width:100px}
+  .gaCommonNav a:nth-of-type(3){display:none}
+  .gaHome .gaStatus{display:none}
+  .gaHome .gaHeaderRight{gap:0}
+  .hostPage .statsModern{grid-template-columns:1fr}
+  .hostPage .statsModern>div{display:grid;grid-template-columns:1fr auto;align-items:center}
+  .hostPage .statsModern span,.hostPage .statsModern small{grid-column:1}
+  .hostPage .statsModern b{grid-column:2;grid-row:1/3}
+  .cwPage .cwLobbyGrid{grid-template-columns:1fr}
+  .cwPage .cwPlayersCard{grid-column:auto}
+  .cwPage .cwBoard{width:min(92vw,480px)}
+  .paymentGrid{grid-template-columns:1fr}
+  body:has(#loginModal) .grid{grid-template-columns:1fr}
+  body:has(#loginModal) .top{align-items:flex-start;flex-direction:column}
+  body:has(#loginModal) .search{display:grid;grid-template-columns:1fr}
+  .kartPage .kartCard{padding:20px}
+  .kartPage .kartRow{flex-direction:column}
+}
+
+@media (max-height:820px) and (min-width:900px){
+  .gaCommonHeader{height:56px;min-height:56px}
+  .gaCommonFooter{min-height:42px;padding-block:10px}
+  .gaPageMain{padding-block:14px 22px}
+  .gaHome .gaHero{min-height:340px;padding-block:22px}
+  .gaHome .gaHeroVisual{min-height:290px}
+  .gaHome .gaLogoStage{width:210px;height:210px}
+  .gaHome .gaLogoStage img{width:145px}
+  .hostPage .hostRoomSummary{min-height:110px;padding:14px 18px}
+  .hostPage .statsModern{margin:9px 0}
+  .hostPage .statsModern>div{padding:11px 13px}
+  .hostPage .controlCard{padding:13px}
+  .hostPage .flowSection{padding:12px}
+  .paymentWrap{padding-block:14px 24px}
+  body.tv>.gaCommonFooter{display:none}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}

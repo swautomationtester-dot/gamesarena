@@ -1,0 +1,56 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Card Match</title><link rel="stylesheet" href="/style.css?v=110"><link rel="stylesheet" href="/card-match.css?v=20260812-pair-reveal-1"><link rel="stylesheet" href="/common-ui.css?v=20260812-showcase-final-2">
+</head>
+<body class="cardMatchPage">
+<main class="cmWrap gaPageMain">
+<section id="home" class="cmScreen active"><div class="cmHero"><label>MULTIPLAYER MINI GAME</label><h1>Remember.<br><em>Match.</em><br>Win.</h1><p>2–4 players. The Host screen shows the board while everyone plays from their phone.</p><div class="cmHeroBtns"><button id="create" class="primary big">🃏 Create Card Game</button><button id="join" class="cmSecondary big">📱 Join a Game</button></div></div></section>
+<section id="lobby" class="cmScreen cmLobbyScreen"><img class="cmBrokenSafeLogo" src="/assets/gamesarena-logo-premium.png" alt="GamesArena" onerror="this.remove()"><div id="participantIdentityLobby" class="cmParticipantIdentity hidden"></div><div class="cmPanel"><label>ROOM READY</label><div id="code" class="cmCode">----</div><p>Scan the QR code or enter the room code.</p><div id="qr" class="cmQr"></div><a id="url" class="cmUrl cmJoinLink" href="#" target="_blank" rel="noopener noreferrer">Open player page ↗</a><div id="players" class="cmPlayers"></div><button id="start" class="primary big wide hostOnlyControl">Start Match</button><button id="lobbyNew" class="cmSecondary wide hostOnlyControl">New Room</button></div></section>
+<section id="joinPage" class="cmScreen cmJoinScreen"><img class="cmBrokenSafeLogo" src="/assets/gamesarena-logo-premium.png" alt="GamesArena" onerror="this.remove()"><div id="participantIdentityJoin" class="cmParticipantIdentity hidden"></div><div class="cmPanel"><label>JOIN GAME</label><h2>Enter the arena</h2><p id="joinHint" class="cmHint">Enter the code shown on the TV.</p><input id="name" maxlength="18" placeholder="Your name"><input id="room" maxlength="4" inputmode="numeric" placeholder="4-digit room code"><button id="joinNow" class="primary big wide">Join Game</button><button id="back" class="cmSecondary wide">Back</button></div></section>
+<section id="game" class="cmScreen cmGame">
+ <div id="participantIdentityGame" class="cmParticipantIdentity hidden"></div>
+ <div class="cmGameTop">
+   <div>
+     <label>MEMORY BATTLE</label>
+     <h2 id="turn">Waiting…</h2>
+   </div>
+   <div class="cmTvControls">
+     <button id="refreshGame" class="cmControl">↻ Refresh Board</button>
+     <button id="restartGame" class="cmControl primarySmall">⟳ New Game</button>
+   </div>
+ </div>
+
+ <div class="cmGameLayout">
+   <aside class="cmSidePanel cmLeftPanel">
+     <div class="cmSideCard">
+       <label>GAME INFO</label>
+       <div class="cmInfoRow"><span>👥</span><b>Players</b><strong id="sidePlayers">0/4</strong></div>
+       <div class="cmInfoRow"><span>🧩</span><b>Pairs</b><strong id="sidePairs">0</strong></div>
+       <div class="cmInfoRow"><span>🎯</span><b>Room</b><strong id="sideRoom">----</strong></div>
+     </div>
+     <div class="cmSideCard">
+       <label>HOW TO PLAY</label>
+       <p>Players take turns selecting two cards.</p>
+       <p>Match a pair to score and play again.</p>
+       <p>Matched pairs stay highlighted in the player's color.</p>
+     </div>
+   </aside>
+
+   <div class="cmCenterBoard">
+     <div id="board" class="cmBoard"></div>
+   </div>
+
+   <aside class="cmSidePanel cmRightPanel">
+     <div class="cmSideCard">
+       <label>GAME STATUS</label>
+       <div class="cmCurrent cmNextOnly"><span class="scoreDot" id="nextDot"></span><div><small>Next Turn</small><b id="nextPlayer">—</b></div></div>
+     </div>
+     <div class="cmSideCard">
+       <label>SCOREBOARD</label>
+       <div id="sideScores"></div>
+     </div>
+   </aside>
+ </div>
+</section>
+<section id="winner" class="cmScreen"><div class="cmPanel"><div class="trophy">🏆</div><label>MATCH COMPLETE</label><h1 id="winnerText"></h1><div id="winnerAmount" class="cmWinnerAmount"></div><div id="final"></div><button id="again" class="primary big wide">Play Again</button><button id="winnerRefresh" class="cmSecondary wide">Refresh Board</button></div></section>
+<div id="toast"></div></main>
+<script src="/socket.io/socket.io.js"></script><script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script><script src="/card-match.js?v=20260812-showcase-final-2"></script><script src="/common-ui.js?v=20260812-showcase-final-2"></script>
+</body></html>

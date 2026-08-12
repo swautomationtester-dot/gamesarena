@@ -1,0 +1,450 @@
+
+:root{
+  --ga-bg:#070914;--ga-panel:rgba(15,20,38,.78);--ga-border:rgba(255,255,255,.09);
+  --ga-text:#f8fafc;--ga-muted:#94a3b8;--ga-accent:#7c5cff;--ga-cyan:#22d3ee;
+}
+html{background:var(--ga-bg)}
+body.gaCommonPage{
+  min-height:100vh;color:var(--ga-text);
+  background:
+    radial-gradient(circle at 10% 0%,rgba(124,92,255,.16),transparent 30%),
+    radial-gradient(circle at 90% 10%,rgba(34,211,238,.10),transparent 27%),
+    linear-gradient(135deg,#070914,#0b1020 52%,#070914);
+  background-attachment:fixed;
+}
+.gaCommonPage::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.22;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:linear-gradient(to bottom,#000,transparent 90%);
+}
+.gaCommonHeader{
+  height:70px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;
+  gap:18px;padding:0 clamp(14px,3vw,34px);position:sticky;top:0;z-index:100;
+  background:rgba(6,8,18,.72);border-bottom:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(20px) saturate(140%);box-shadow:0 12px 35px rgba(0,0,0,.22);
+}
+.gaCommonBrand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;min-width:0}
+.gaCommonBrand img{width:42px;height:42px;object-fit:contain;filter:drop-shadow(0 8px 18px rgba(124,92,255,.25))}
+.gaCommonBrandText{font-weight:950;letter-spacing:-.4px;font-size:18px;white-space:nowrap}
+.gaCommonBrandText small{display:block;color:#64748b;font-size:8px;letter-spacing:1.7px;margin-top:1px}
+.gaCommonNav{display:flex;align-items:center;gap:8px}
+.gaCommonNav a{
+  color:#cbd5e1;text-decoration:none;padding:9px 13px;border-radius:11px;font-size:12px;font-weight:800;
+  border:1px solid transparent;transition:.18s ease;
+}
+.gaCommonNav a:hover{background:rgba(255,255,255,.06);border-color:var(--ga-border);color:#fff;transform:translateY(-1px)}
+.gaCommonLive{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border-radius:999px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.18);font-size:9px;font-weight:900;letter-spacing:1px;color:#86efac}
+.gaCommonLive i{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 15px #22c55e;animation:gaPulse 1.8s infinite}
+.gaCommonFooter{
+  margin-top:50px;padding:24px clamp(16px,4vw,40px);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+  border-top:1px solid rgba(255,255,255,.07);background:rgba(5,7,16,.48);color:#64748b;font-size:11px;
+}
+.gaCommonFooter strong{color:#cbd5e1}
+.gaCommonFooterLinks{display:flex;gap:14px;flex-wrap:wrap}
+.gaCommonFooter a{color:#94a3b8;text-decoration:none}.gaCommonFooter a:hover{color:#fff}
+.gaPageMain{animation:gaPageIn .45s ease both}
+.gaCommonPage .wrap,.gaCommonPage .hostPage,.gaCommonPage .cmWrap{animation:gaPageIn .45s ease both}
+.gaCommonPage button,.gaCommonPage a{transition:transform .18s ease,box-shadow .18s ease,background .18s ease,border-color .18s ease}
+.gaCommonPage button:not(:disabled):hover{transform:translateY(-2px)}
+@keyframes gaPageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes gaPulse{50%{opacity:.55;transform:scale(1.15)}}
+@media(max-width:720px){
+  .gaCommonHeader{height:62px}.gaCommonBrand img{width:36px;height:36px}.gaCommonBrandText{font-size:16px}
+  .gaCommonNav a{padding:7px 8px;font-size:10px}.gaCommonLive{display:none}
+  .gaCommonFooter{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  .gaCommonPage *{animation:none!important;transition:none!important}
+}
+
+/* ===== GamesArena responsive system v20260812 ===== */
+*,*::before,*::after{box-sizing:border-box}
+html,body{max-width:100%;overflow-x:hidden}
+img,svg,video,canvas{max-width:100%;height:auto}
+button,input,select,textarea{max-width:100%}
+table{max-width:100%}
+pre,code{max-width:100%;overflow:auto}
+.wrap,.hostPage,.cmWrap,.paymentWrap,.qrStage,.registrationLobbyLayout,.pollStage{width:min(100% - 24px,1440px);max-width:1440px}
+.gaCommonPage main{min-width:0}
+.gaCommonPage .hostPage{padding-bottom:40px}
+.gaCommonPage .hostHeader,.gaCommonPage .sectionHead,.gaCommonPage .flowHeading{min-width:0}
+.gaCommonPage .hostHeader>*{min-width:0}
+.gaCommonPage .hostHeaderActions{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.gaCommonPage .hostGrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,300px);gap:20px}
+.gaCommonPage .hostMain,.gaCommonPage .hostSide{min-width:0}
+.gaCommonPage .controlCard,.gaCommonPage .flowSection,.gaCommonPage .hostPrizeCard,.gaCommonPage .hostJoinCard{min-width:0}
+.gaCommonPage .flowButtons{display:flex;flex-wrap:wrap;gap:9px}
+.gaCommonPage .flowButtons button{flex:1 1 180px;min-width:0}
+.gaCommonPage .statsModern{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gaCommonPage .hostOptions,.gaCommonPage .answers{min-width:0}
+.gaCommonPage .hostQuestionCard,.gaCommonPage .hostQuestionCard h3{overflow-wrap:anywhere}
+.gaCommonPage .hostLoginModal{
+  position:fixed;inset:0;z-index:10000;overflow:auto;
+  display:flex;align-items:center;justify-content:center;
+  padding:86px 16px 28px;
+}
+.gaCommonPage .hostLoginCard,.gaCommonPage .paymentEditCard{
+  max-height:calc(100dvh - 114px);overflow:auto;
+  width:min(430px,100%);flex:0 1 auto;
+}
+.gaCommonPage .paymentEditGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gaCommonPage .paymentEditGrid .wide{grid-column:1/-1}
+.gaCommonPage .hostSide{position:sticky;top:90px;align-self:start}
+.gaCommonPage .hostSide .qr,.gaCommonPage .hostSideQr{max-width:180px;height:auto}
+.gaCommonPage .hostSideRoomCode strong{font-size:clamp(30px,5vw,52px)}
+.gaCommonPage .paymentInventoryPanel,.gaCommonPage .paymentTable,.gaCommonPage .tableWrap{
+  width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;
+}
+.gaCommonPage .paymentTable table,.gaCommonPage .paymentInventoryPanel table{min-width:720px}
+.gaCommonPage .gaCommonFooter{position:relative}
+.gaCommonPage .fastestPlayerStage{
+  width:min(760px,100%);margin:0 auto;padding:clamp(18px,4vw,36px);
+  border:1px solid rgba(227,198,106,.30);border-radius:28px;
+  background:radial-gradient(circle at 50% 0%,rgba(227,198,106,.12),transparent 55%),rgba(2,37,42,.72);
+  box-shadow:0 22px 70px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.06);
+  text-align:center;animation:gaPageIn .35s ease both;
+}
+.gaCommonPage .fastestPlayerKicker{color:#e3c66a;font-weight:950;letter-spacing:3px;font-size:12px}
+.gaCommonPage .fastestPlayerStage h2{font-size:clamp(26px,6vw,52px);margin:10px 0 8px;letter-spacing:-1px}
+.gaCommonPage .fastestPlayerHint{color:#b9d3d0;font-size:clamp(12px,2.2vw,16px);margin:0 auto 18px;max-width:600px}
+.gaCommonPage .fastestPlayerSequence{
+  min-height:clamp(74px,12vw,130px);display:flex;align-items:center;justify-content:center;
+  margin:14px 0;padding:12px;overflow:hidden;
+  border:1px solid rgba(227,198,106,.40);border-radius:20px;background:rgba(255,255,255,.06);
+  color:#e3c66a;font-weight:950;font-size:clamp(28px,7vw,72px);letter-spacing:clamp(4px,1.8vw,16px);
+}
+.gaCommonPage .fastestPlayerTimer{font-size:clamp(28px,6vw,58px);font-weight:950;color:#fff;margin:12px 0 18px;min-height:1.2em}
+.gaCommonPage .fastestPlayerProgress{margin-top:14px;color:#9fd0cf;font-size:12px;font-weight:900;letter-spacing:1px}
+.gaCommonPage .fastPad{width:min(520px,100%);max-width:none;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 auto}
+.gaCommonPage .fastKey{min-height:clamp(74px,16vw,120px);font-size:clamp(28px,6vw,48px);padding:12px;border-radius:18px}
+.gaCommonPage .fastKey.pressed{transform:scale(.96);box-shadow:0 0 0 3px rgba(227,198,106,.35)}
+.gaCommonPage .fastKey.wrongKey{animation:fastWrong .25s ease}
+@keyframes fastWrong{50%{transform:translateX(5px);border-color:#ff6b7a}}
+.gaCommonPage .sequenceHidden{visibility:hidden;opacity:0}
+@media(max-width:1050px){
+  .gaCommonPage .hostGrid{grid-template-columns:1fr}
+  .gaCommonPage .hostSide{position:static}
+  .gaCommonPage .statsModern{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gaCommonPage .hostHeader{align-items:flex-start}
+}
+@media(max-width:700px){
+  .gaCommonPage .hostPage{width:100%;padding:18px 10px 45px}
+  .gaCommonPage .hostHeader{flex-direction:column;gap:12px}
+  .gaCommonPage .hostHeaderActions{width:100%;justify-content:flex-start}
+  .gaCommonPage .hostHeaderActions>*{flex:1 1 120px}
+  .gaCommonPage .statsModern{grid-template-columns:1fr 1fr;gap:8px}
+  .gaCommonPage .statsModern>div{padding:13px}
+  .gaCommonPage .controlCard{padding:13px}
+  .gaCommonPage .flowSection{padding:13px}
+  .gaCommonPage .sectionHead{align-items:flex-start;flex-direction:column;gap:8px}
+  .gaCommonPage .paymentEditGrid{grid-template-columns:1fr}
+  .gaCommonPage .paymentEditGrid .wide{grid-column:auto}
+  .gaCommonPage .hostLoginModal{padding:74px 10px 16px;align-items:flex-start}
+  .gaCommonPage .hostLoginCard,.gaCommonPage .paymentEditCard{max-height:calc(100dvh - 90px);padding:20px}
+  .gaCommonPage .fastestPlayerStage{border-radius:20px;padding:18px 12px}
+  .gaCommonPage .fastPad{gap:8px}
+  .gaCommonPage .fastKey{min-height:82px;border-radius:14px}
+}
+@media(max-width:480px){
+  .gaCommonNav a{font-size:9px;padding:7px 6px}
+  .gaCommonBrandText{font-size:15px}
+  .gaCommonBrandText small{font-size:7px}
+  .gaCommonPage .statsModern{grid-template-columns:1fr 1fr}
+  .gaCommonPage .flowButtons{display:grid;grid-template-columns:1fr}
+  .gaCommonPage .flowButtons button{width:100%}
+  .gaCommonPage .fastestPlayerSequence{letter-spacing:3px}
+}
+@media(prefers-reduced-motion:reduce){
+  .gaCommonPage .fastestPlayerStage,.gaCommonPage .fastKey.wrongKey{animation:none}
+}
+
+
+/* ===== UNIVERSAL GAMESARENA ANIMATED SHELL ===== */
+html,body{min-height:100%;}
+body.gaCommonPage{position:relative;min-height:100dvh;display:flex;flex-direction:column;isolation:isolate;overflow-x:hidden;
+ background:#050816;color:var(--ga-text)}
+body.gaCommonPage main{position:relative;z-index:2;flex:1 0 auto;width:100%;}
+.gaSharedBackground{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:
+ radial-gradient(circle at 15% 10%,rgba(124,92,255,.22),transparent 28%),
+ radial-gradient(circle at 85% 15%,rgba(34,211,238,.16),transparent 25%),
+ radial-gradient(circle at 50% 90%,rgba(244,206,99,.08),transparent 30%),
+ linear-gradient(135deg,#050816 0%,#071423 48%,#050816 100%);}
+.gaSharedBackground::before{content:"";position:absolute;inset:-20%;background:
+ conic-gradient(from 0deg at 50% 50%,transparent 0deg,rgba(124,92,255,.12) 55deg,transparent 110deg,rgba(34,211,238,.10) 190deg,transparent 250deg,rgba(244,206,99,.08) 315deg,transparent 360deg);
+ filter:blur(55px);animation:gaAuroraSpin 24s linear infinite;}
+.gaSharedBackground::after{content:"";position:absolute;inset:0;background-image:
+ linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+ background-size:52px 52px;mask-image:linear-gradient(to bottom,#000,transparent 92%);opacity:.5;}
+.gaSharedOrb{position:absolute;border-radius:50%;filter:blur(1px);opacity:.34;animation:gaFloat 12s ease-in-out infinite;}
+.gaSharedOrb.o1{width:180px;height:180px;left:-40px;top:16%;background:radial-gradient(circle,rgba(124,92,255,.32),transparent 68%)}
+.gaSharedOrb.o2{width:240px;height:240px;right:-70px;top:42%;background:radial-gradient(circle,rgba(34,211,238,.25),transparent 68%);animation-delay:-4s}
+.gaSharedOrb.o3{width:150px;height:150px;left:48%;bottom:-40px;background:radial-gradient(circle,rgba(244,206,99,.18),transparent 68%);animation-delay:-8s}
+.gaSharedStars{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.65) 1px,transparent 1.5px);background-size:97px 83px;opacity:.18;animation:gaStarsDrift 30s linear infinite;}
+.gaCommonHeader{flex:0 0 auto;min-height:70px;}
+.gaCommonFooter{flex:0 0 auto;margin-top:auto;position:relative;z-index:3;backdrop-filter:blur(18px);}
+.gaMenuToggle{display:none;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.05);color:#fff;width:42px;height:42px;border-radius:12px;align-items:center;justify-content:center;flex-direction:column;gap:4px;cursor:pointer;}
+.gaMenuToggle span{display:block;width:18px;height:2px;border-radius:2px;background:#eaf2ff;transition:.2s}
+.gaCommonHeader .gaCommonNav{margin-left:auto}
+.gaCommonHeader .gaCommonNav a.active{background:rgba(255,255,255,.07);color:#fff;border-color:rgba(255,255,255,.1)}
+@keyframes gaAuroraSpin{to{transform:rotate(360deg)}}
+@keyframes gaFloat{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(22px,-26px,0) scale(1.08)}}
+@keyframes gaStarsDrift{to{transform:translate3d(52px,83px,0)}}
+@media(max-width:760px){
+ .gaCommonHeader{height:64px;min-height:64px;padding-inline:14px}
+ .gaMenuToggle{display:flex;margin-left:auto}
+ .gaCommonHeader .gaCommonNav{display:none;position:absolute;left:12px;right:12px;top:70px;padding:10px;flex-direction:column;align-items:stretch;gap:5px;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:rgba(5,8,20,.94);backdrop-filter:blur(24px);box-shadow:0 24px 60px rgba(0,0,0,.45)}
+ .gaCommonHeader .gaCommonNav.open{display:flex}
+ .gaCommonHeader .gaCommonNav a{padding:12px 13px;font-size:12px}
+ .gaCommonHeader .gaCommonLive{display:none}
+ .gaCommonFooter{padding:18px 14px;justify-content:center;text-align:center}
+ .gaCommonFooterLinks{justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){.gaSharedBackground::before,.gaSharedOrb,.gaSharedStars{animation:none!important}}
+
+
+/* ============================================================
+   GamesArena FINAL UNIVERSAL DESIGN SYSTEM
+   v20260812-final
+   Applies to Home, Explore, Host, Registration, Participant,
+   Quiz TV, Payment, Card Match and Color War screens.
+   ============================================================ */
+
+:root{
+  --ga-gold:#f4ce63;
+  --ga-gold-2:#e9b949;
+  --ga-cyan:#36e1e4;
+  --ga-purple:#7c5cff;
+  --ga-ink:#050816;
+  --ga-surface:rgba(8,18,30,.72);
+  --ga-surface-strong:rgba(7,15,27,.90);
+  --ga-line:rgba(255,255,255,.10);
+  --ga-line-gold:rgba(244,206,99,.28);
+  --ga-copy:#f7fbff;
+  --ga-muted:#9eb0c7;
+}
+
+/* One background and one visual language everywhere. */
+html:has(body.gaUniversalShell),
+body.gaUniversalShell{
+  background:#050816 !important;
+  color:var(--ga-copy);
+}
+body.gaUniversalShell{
+  min-height:100dvh !important;
+  overflow-x:hidden !important;
+  position:relative;
+  isolation:isolate;
+}
+body.gaUniversalShell::before,
+body.gaUniversalShell::after{
+  display:none !important;
+}
+
+/* All page content sits above the animated shell. */
+body.gaUniversalShell > *:not(.gaSharedBackground):not(.gaCommonHeader):not(.gaCommonFooter){
+  position:relative;
+  z-index:2;
+}
+body.gaUniversalShell main,
+body.gaUniversalShell .gaPageMain,
+body.gaUniversalShell .wrap,
+body.gaUniversalShell .hostPage,
+body.gaUniversalShell .cmWrap,
+body.gaUniversalShell .cwWrap,
+body.gaUniversalShell .cwTvStage,
+body.gaUniversalShell .paymentWrap,
+body.gaUniversalShell .quizTvEntryMain{
+  position:relative;
+  z-index:2;
+}
+
+/* Shared header: same geometry across every viewport. */
+body.gaUniversalShell .gaCommonHeader{
+  min-height:72px;
+  height:72px;
+  padding-inline:clamp(14px,3vw,42px);
+  background:rgba(4,8,18,.70);
+  border-bottom:1px solid rgba(255,255,255,.09);
+  box-shadow:0 14px 45px rgba(0,0,0,.25);
+  backdrop-filter:blur(24px) saturate(145%);
+}
+body.gaUniversalShell .gaCommonBrand img{
+  width:44px;height:44px;
+}
+body.gaUniversalShell .gaCommonBrandText{
+  font-size:18px;
+  font-weight:950;
+}
+body.gaUniversalShell .gaCommonNav{
+  gap:5px;
+}
+body.gaUniversalShell .gaCommonNav a{
+  min-height:40px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+body.gaUniversalShell .gaCommonNav a.active{
+  color:#fff;
+  background:linear-gradient(180deg,rgba(244,206,99,.13),rgba(255,255,255,.045));
+  border-color:var(--ga-line-gold);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07);
+}
+
+/* Shared footer: identical structure and spacing everywhere. */
+body.gaUniversalShell .gaCommonFooter{
+  width:100%;
+  margin-top:auto;
+  min-height:74px;
+  padding:20px clamp(14px,3vw,42px);
+  background:rgba(4,8,18,.72);
+  border-top:1px solid rgba(255,255,255,.08);
+  box-shadow:0 -14px 45px rgba(0,0,0,.16);
+  backdrop-filter:blur(20px);
+}
+
+/* Standard page breathing room. Existing page-specific layouts keep their
+   own widths; these rules only prevent edge collisions. */
+body.gaUniversalShell main,
+body.gaUniversalShell .gaPageMain{
+  width:100%;
+  min-width:0;
+}
+body.gaUniversalShell input,
+body.gaUniversalShell select,
+body.gaUniversalShell textarea,
+body.gaUniversalShell button{
+  font:inherit;
+  max-width:100%;
+}
+body.gaUniversalShell img,
+body.gaUniversalShell video,
+body.gaUniversalShell canvas,
+body.gaUniversalShell svg{
+  max-width:100%;
+}
+
+/* Consistent premium panels without flattening each game's identity. */
+body.gaUniversalShell .box,
+body.gaUniversalShell .card,
+body.gaUniversalShell .paymentCard,
+body.gaUniversalShell .controlCard,
+body.gaUniversalShell .flowSection,
+body.gaUniversalShell .hostPrizeCard,
+body.gaUniversalShell .hostJoinCard,
+body.gaUniversalShell .cmPanel,
+body.gaUniversalShell .cwPanel,
+body.gaUniversalShell .quizTvEntryCard{
+  border-color:rgba(255,255,255,.10);
+  box-shadow:0 24px 80px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.045);
+}
+
+/* Gold is reserved for important actions / KBC-style prize moments. */
+body.gaUniversalShell .primary,
+body.gaUniversalShell .gold,
+body.gaUniversalShell .btn.gold{
+  border-color:rgba(244,206,99,.40);
+  box-shadow:0 10px 30px rgba(244,206,99,.12);
+}
+body.gaUniversalShell .primary:hover,
+body.gaUniversalShell .gold:hover,
+body.gaUniversalShell .btn.gold:hover{
+  box-shadow:0 14px 38px rgba(244,206,99,.18);
+}
+
+/* 15-inch laptop optimization: avoid oversized vertical whitespace. */
+@media (min-width:1050px) and (max-width:1500px) and (max-height:950px){
+  body.gaUniversalShell .gaCommonHeader{height:68px;min-height:68px}
+  body.gaUniversalShell .gaCommonFooter{min-height:66px;padding-block:16px}
+  body.gaUniversalShell .gaHeroVisual{height:min(480px,58vh)}
+  body.gaUniversalShell .gamesHero{padding-top:44px;padding-bottom:28px}
+  body.gaUniversalShell .gamesGrid{margin-top:24px}
+  body.gaUniversalShell .cwHero{margin-top:28px;margin-bottom:28px}
+  body.gaUniversalShell .cwTvStage{min-height:calc(100dvh - 134px)}
+}
+
+/* Tablet */
+@media (max-width:900px){
+  body.gaUniversalShell .gaCommonHeader{
+    height:66px;
+    min-height:66px;
+    padding-inline:14px;
+  }
+  body.gaUniversalShell .gaCommonBrand img{width:40px;height:40px}
+  body.gaUniversalShell .gaCommonBrandText{font-size:16px}
+}
+
+/* Mobile navigation */
+@media (max-width:760px){
+  body.gaUniversalShell .gaCommonHeader{
+    position:sticky;
+    top:0;
+  }
+  body.gaUniversalShell .gaCommonHeader .gaCommonNav{
+    top:72px;
+  }
+  body.gaUniversalShell .gaCommonFooter{
+    padding:18px 14px;
+    min-height:92px;
+  }
+  body.gaUniversalShell .gaCommonFooterLinks{
+    width:100%;
+    justify-content:center;
+  }
+}
+
+/* Small phones */
+@media (max-width:480px){
+  body.gaUniversalShell .gaCommonHeader{
+    padding-inline:12px;
+  }
+  body.gaUniversalShell .gaCommonBrandText{
+    max-width:112px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  body.gaUniversalShell .gaCommonFooter{
+    font-size:10px;
+  }
+}
+
+/* Respect accessibility preferences. */
+@media (prefers-reduced-motion:reduce){
+  body.gaUniversalShell *,
+  body.gaUniversalShell *::before,
+  body.gaUniversalShell *::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+    transition-duration:.001ms !important;
+  }
+}
+
+/* Host utilities intentionally live in the universal header. */
+body.gaUniversalShell .gaHostHeaderAction{
+  min-height:40px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 12px;
+  border-radius:11px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.035);
+  color:#cbd5e1;
+  font-size:11px;
+  font-weight:850;
+  cursor:pointer;
+}
+body.gaUniversalShell .gaHostHeaderAction:hover{
+  color:#fff;
+  border-color:rgba(244,206,99,.30);
+  background:rgba(244,206,99,.08);
+  transform:translateY(-1px);
+}
+body.gaUniversalShell .gaHostHeaderAction.gaHostLogout{
+  color:#ffd6d6;
+}
+@media(max-width:760px){
+  body.gaUniversalShell .gaHostHeaderAction{width:100%;justify-content:flex-start;min-height:42px}
+}
